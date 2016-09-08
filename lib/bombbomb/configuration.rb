@@ -135,7 +135,7 @@ module BombBomb
 
     def initialize
       @scheme = 'https'
-      @host = 'dev.api.bombbomb.com'
+      @host = 'api.bombbomb.com'
       @base_path = '/v2'
       @api_key = {}
       @api_key_prefix = {}
