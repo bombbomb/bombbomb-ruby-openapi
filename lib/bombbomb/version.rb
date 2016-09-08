@@ -22,5 +22,5 @@ limitations under the License.
 =end
 
 module BombBomb
-  VERSION = "{$api_version}"
+  VERSION = "{2.0}"
 end
