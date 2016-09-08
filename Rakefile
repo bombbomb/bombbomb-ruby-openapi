@@ -1,3 +1,3 @@
 task :default do
-  echo "So Raked!"
+  puts "So Raked!"
 end
