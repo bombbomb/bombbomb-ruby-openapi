@@ -30,8 +30,8 @@ Gem::Specification.new do |s|
   s.name        = "bombbomb"
   s.version     = BombBomb::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Swagger-Codegen"]
-  s.email       = [""]
+  s.authors     = ["BombBomb"]
+  s.email       = ["support@bombbomb.com"]
   s.homepage    = "http://developer.bombbomb.com"
   s.summary     = "A ruby wrapper for BombBomb&#39;s API"
   s.description = "We make it easy to build relationships using simple videos."
