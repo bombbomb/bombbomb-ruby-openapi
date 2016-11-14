@@ -24,38 +24,33 @@ limitations under the License.
 require 'date'
 
 module BombBomb
-  # The BBWebHook class
-  class BBWebHook
-    # The user to whom the webhook belongs
-    attr_accessor :user_id
+  # The TeamPublicRepresentation class
+  class TeamPublicRepresentation
+    # The id of the team
+    attr_accessor :id
 
-    # The id of the hook
-    attr_accessor :hook_id
+    # The name of the team
+    attr_accessor :name
 
-    # the url to send hook requests to
-    attr_accessor :url
-
-    # Whether the hook is displayed to the user
-    attr_accessor :is_hidden
+    # The date the team was created
+    attr_accessor :created_date
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'user_id' => :'userId',
-        :'hook_id' => :'hookId',
-        :'url' => :'url',
-        :'is_hidden' => :'isHidden'
+        :'id' => :'id',
+        :'name' => :'name',
+        :'created_date' => :'createdDate'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'user_id' => :'String',
-        :'hook_id' => :'Integer',
-        :'url' => :'String',
-        :'is_hidden' => :'BOOLEAN'
+        :'id' => :'String',
+        :'name' => :'String',
+        :'created_date' => :'String'
       }
     end
 
@@ -67,20 +62,16 @@ module BombBomb
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'userId')
-        self.user_id = attributes[:'userId']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'hookId')
-        self.hook_id = attributes[:'hookId']
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'url')
-        self.url = attributes[:'url']
-      end
-
-      if attributes.has_key?(:'isHidden')
-        self.is_hidden = attributes[:'isHidden']
+      if attributes.has_key?(:'createdDate')
+        self.created_date = attributes[:'createdDate']
       end
 
     end
@@ -103,10 +94,9 @@ module BombBomb
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          user_id == o.user_id &&
-          hook_id == o.hook_id &&
-          url == o.url &&
-          is_hidden == o.is_hidden
+          id == o.id &&
+          name == o.name &&
+          created_date == o.created_date
     end
 
     # @see the `==` method
@@ -118,7 +108,7 @@ module BombBomb
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [user_id, hook_id, url, is_hidden].hash
+      [id, name, created_date].hash
     end
 
     # Builds the object from hash

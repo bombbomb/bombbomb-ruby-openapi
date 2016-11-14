@@ -24,38 +24,43 @@ limitations under the License.
 require 'date'
 
 module BombBomb
-  # The BBWebHook class
-  class BBWebHook
-    # The user to whom the webhook belongs
+  # The CurriculumUserProgress class
+  class CurriculumUserProgress
+    # Id
+    attr_accessor :id
+
+    # User Id
     attr_accessor :user_id
 
-    # The id of the hook
-    attr_accessor :hook_id
+    # Curriculum Item Id
+    attr_accessor :curriculum_item_id
 
-    # the url to send hook requests to
-    attr_accessor :url
+    # Curriculum Id
+    attr_accessor :curriculum_id
 
-    # Whether the hook is displayed to the user
-    attr_accessor :is_hidden
+    # When the final email is scheduled to be sent
+    attr_accessor :completed_date
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'user_id' => :'userId',
-        :'hook_id' => :'hookId',
-        :'url' => :'url',
-        :'is_hidden' => :'isHidden'
+        :'curriculum_item_id' => :'curriculumItemId',
+        :'curriculum_id' => :'curriculumId',
+        :'completed_date' => :'completedDate'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'id' => :'String',
         :'user_id' => :'String',
-        :'hook_id' => :'Integer',
-        :'url' => :'String',
-        :'is_hidden' => :'BOOLEAN'
+        :'curriculum_item_id' => :'String',
+        :'curriculum_id' => :'String',
+        :'completed_date' => :'DateTime'
       }
     end
 
@@ -67,20 +72,24 @@ module BombBomb
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.has_key?(:'userId')
         self.user_id = attributes[:'userId']
       end
 
-      if attributes.has_key?(:'hookId')
-        self.hook_id = attributes[:'hookId']
+      if attributes.has_key?(:'curriculumItemId')
+        self.curriculum_item_id = attributes[:'curriculumItemId']
       end
 
-      if attributes.has_key?(:'url')
-        self.url = attributes[:'url']
+      if attributes.has_key?(:'curriculumId')
+        self.curriculum_id = attributes[:'curriculumId']
       end
 
-      if attributes.has_key?(:'isHidden')
-        self.is_hidden = attributes[:'isHidden']
+      if attributes.has_key?(:'completedDate')
+        self.completed_date = attributes[:'completedDate']
       end
 
     end
@@ -103,10 +112,11 @@ module BombBomb
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           user_id == o.user_id &&
-          hook_id == o.hook_id &&
-          url == o.url &&
-          is_hidden == o.is_hidden
+          curriculum_item_id == o.curriculum_item_id &&
+          curriculum_id == o.curriculum_id &&
+          completed_date == o.completed_date
     end
 
     # @see the `==` method
@@ -118,7 +128,7 @@ module BombBomb
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [user_id, hook_id, url, is_hidden].hash
+      [id, user_id, curriculum_item_id, curriculum_id, completed_date].hash
     end
 
     # Builds the object from hash

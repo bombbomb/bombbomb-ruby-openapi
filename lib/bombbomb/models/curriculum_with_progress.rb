@@ -24,38 +24,58 @@ limitations under the License.
 require 'date'
 
 module BombBomb
-  # The BBWebHook class
-  class BBWebHook
-    # The user to whom the webhook belongs
-    attr_accessor :user_id
+  # The CurriculumWithProgress class
+  class CurriculumWithProgress
+    # Collection of User Progress for Curriculum
+    attr_accessor :progress
 
-    # The id of the hook
-    attr_accessor :hook_id
+    # Id
+    attr_accessor :id
 
-    # the url to send hook requests to
-    attr_accessor :url
+    # Name
+    attr_accessor :name
 
-    # Whether the hook is displayed to the user
-    attr_accessor :is_hidden
+    # HTML formatted intro
+    attr_accessor :html_intro
+
+    # URI of header image
+    attr_accessor :img_url
+
+    # Number of curriculum items
+    attr_accessor :item_count
+
+    # Render method for curriculum
+    attr_accessor :render_as
+
+    # Globally visible
+    attr_accessor :visible_to_all_users
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'user_id' => :'userId',
-        :'hook_id' => :'hookId',
-        :'url' => :'url',
-        :'is_hidden' => :'isHidden'
+        :'progress' => :'progress',
+        :'id' => :'id',
+        :'name' => :'name',
+        :'html_intro' => :'htmlIntro',
+        :'img_url' => :'imgUrl',
+        :'item_count' => :'itemCount',
+        :'render_as' => :'renderAs',
+        :'visible_to_all_users' => :'visibleToAllUsers'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'user_id' => :'String',
-        :'hook_id' => :'Integer',
-        :'url' => :'String',
-        :'is_hidden' => :'BOOLEAN'
+        :'progress' => :'Array<CurriculumUserProgress>',
+        :'id' => :'String',
+        :'name' => :'String',
+        :'html_intro' => :'String',
+        :'img_url' => :'String',
+        :'item_count' => :'Integer',
+        :'render_as' => :'String',
+        :'visible_to_all_users' => :'BOOLEAN'
       }
     end
 
@@ -67,20 +87,38 @@ module BombBomb
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'userId')
-        self.user_id = attributes[:'userId']
+      if attributes.has_key?(:'progress')
+        if (value = attributes[:'progress']).is_a?(Array)
+          self.progress = value
+        end
       end
 
-      if attributes.has_key?(:'hookId')
-        self.hook_id = attributes[:'hookId']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'url')
-        self.url = attributes[:'url']
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'isHidden')
-        self.is_hidden = attributes[:'isHidden']
+      if attributes.has_key?(:'htmlIntro')
+        self.html_intro = attributes[:'htmlIntro']
+      end
+
+      if attributes.has_key?(:'imgUrl')
+        self.img_url = attributes[:'imgUrl']
+      end
+
+      if attributes.has_key?(:'itemCount')
+        self.item_count = attributes[:'itemCount']
+      end
+
+      if attributes.has_key?(:'renderAs')
+        self.render_as = attributes[:'renderAs']
+      end
+
+      if attributes.has_key?(:'visibleToAllUsers')
+        self.visible_to_all_users = attributes[:'visibleToAllUsers']
       end
 
     end
@@ -103,10 +141,14 @@ module BombBomb
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          user_id == o.user_id &&
-          hook_id == o.hook_id &&
-          url == o.url &&
-          is_hidden == o.is_hidden
+          progress == o.progress &&
+          id == o.id &&
+          name == o.name &&
+          html_intro == o.html_intro &&
+          img_url == o.img_url &&
+          item_count == o.item_count &&
+          render_as == o.render_as &&
+          visible_to_all_users == o.visible_to_all_users
     end
 
     # @see the `==` method
@@ -118,7 +160,7 @@ module BombBomb
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [user_id, hook_id, url, is_hidden].hash
+      [progress, id, name, html_intro, img_url, item_count, render_as, visible_to_all_users].hash
     end
 
     # Builds the object from hash

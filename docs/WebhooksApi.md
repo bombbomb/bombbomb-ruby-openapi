@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**add_web_hook**](WebhooksApi.md#add_web_hook) | **POST** /webhook | Add Webhook
 [**delete_web_hook**](WebhooksApi.md#delete_web_hook) | **DELETE** /webhook/{hookId} | Deletes Webhook
 [**get_web_hooks**](WebhooksApi.md#get_web_hooks) | **GET** /webhook/ | Lists Webhooks
+[**list_web_hook_events**](WebhooksApi.md#list_web_hook_events) | **GET** /webhook/events | Describe WebHook Events
 [**send_webhook_example**](WebhooksApi.md#send_webhook_example) | **POST** /webhook/test | Sends test Webhook
 
 
@@ -57,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
 
@@ -109,7 +110,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
 
@@ -155,7 +156,47 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **list_web_hook_events**
+> list_web_hook_events
+
+Describe WebHook Events
+
+Returns example Webhook events for each kind of possible event.
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+
+api_instance = BombBomb::WebhooksApi.new
+
+begin
+  #Describe WebHook Events
+  api_instance.list_web_hook_events
+rescue BombBomb::ApiError => e
+  puts "Exception when calling WebhooksApi->list_web_hook_events: #{e}"
+end
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
 
@@ -200,7 +241,7 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
 
