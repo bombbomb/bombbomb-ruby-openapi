@@ -24,24 +24,56 @@ limitations under the License.
 require 'date'
 
 module BombBomb
-
-  class InlineResponse200Items
+  # The PromptBot\\Bot class
+  class PromptBotBot
+    # The identifier of the prompt bot. Read Only.
     attr_accessor :id
 
-    attr_accessor :name
-
+    # The prompt bot's owner. Read Only.
     attr_accessor :user_id
 
-    attr_accessor :thumb_url
+    # The default email being sent to contacts in the prompt bot list.
+    attr_accessor :email_id
+
+    # The list to attach the Prompt Bot to.
+    attr_accessor :list_id
+
+    # The prompt subject.
+    attr_accessor :prompt_subject
+
+    # The prompt body.
+    attr_accessor :prompt_body
+
+    # The status of the prompt bot. Read Only.
+    attr_accessor :status
+
+    # when the bot started
+    attr_accessor :start_date
+
+    # when the bot should finish
+    attr_accessor :end_date
+
+    # The type of bot.
+    attr_accessor :bot_type_id
+
+    # The template id used to generate the default email.
+    attr_accessor :template_id
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'name' => :'name',
         :'user_id' => :'userId',
-        :'thumb_url' => :'thumbUrl'
+        :'email_id' => :'emailId',
+        :'list_id' => :'listId',
+        :'prompt_subject' => :'promptSubject',
+        :'prompt_body' => :'promptBody',
+        :'status' => :'status',
+        :'start_date' => :'startDate',
+        :'end_date' => :'endDate',
+        :'bot_type_id' => :'botTypeId',
+        :'template_id' => :'templateId'
       }
     end
 
@@ -49,9 +81,16 @@ module BombBomb
     def self.swagger_types
       {
         :'id' => :'String',
-        :'name' => :'String',
         :'user_id' => :'String',
-        :'thumb_url' => :'String'
+        :'email_id' => :'String',
+        :'list_id' => :'String',
+        :'prompt_subject' => :'String',
+        :'prompt_body' => :'String',
+        :'status' => :'String',
+        :'start_date' => :'DateTime',
+        :'end_date' => :'DateTime',
+        :'bot_type_id' => :'String',
+        :'template_id' => :'String'
       }
     end
 
@@ -67,16 +106,44 @@ module BombBomb
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
       if attributes.has_key?(:'userId')
         self.user_id = attributes[:'userId']
       end
 
-      if attributes.has_key?(:'thumbUrl')
-        self.thumb_url = attributes[:'thumbUrl']
+      if attributes.has_key?(:'emailId')
+        self.email_id = attributes[:'emailId']
+      end
+
+      if attributes.has_key?(:'listId')
+        self.list_id = attributes[:'listId']
+      end
+
+      if attributes.has_key?(:'promptSubject')
+        self.prompt_subject = attributes[:'promptSubject']
+      end
+
+      if attributes.has_key?(:'promptBody')
+        self.prompt_body = attributes[:'promptBody']
+      end
+
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
+      end
+
+      if attributes.has_key?(:'startDate')
+        self.start_date = attributes[:'startDate']
+      end
+
+      if attributes.has_key?(:'endDate')
+        self.end_date = attributes[:'endDate']
+      end
+
+      if attributes.has_key?(:'botTypeId')
+        self.bot_type_id = attributes[:'botTypeId']
+      end
+
+      if attributes.has_key?(:'templateId')
+        self.template_id = attributes[:'templateId']
       end
 
     end
@@ -100,9 +167,16 @@ module BombBomb
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          name == o.name &&
           user_id == o.user_id &&
-          thumb_url == o.thumb_url
+          email_id == o.email_id &&
+          list_id == o.list_id &&
+          prompt_subject == o.prompt_subject &&
+          prompt_body == o.prompt_body &&
+          status == o.status &&
+          start_date == o.start_date &&
+          end_date == o.end_date &&
+          bot_type_id == o.bot_type_id &&
+          template_id == o.template_id
     end
 
     # @see the `==` method
@@ -114,7 +188,7 @@ module BombBomb
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, user_id, thumb_url].hash
+      [id, user_id, email_id, list_id, prompt_subject, prompt_body, status, start_date, end_date, bot_type_id, template_id].hash
     end
 
     # Builds the object from hash

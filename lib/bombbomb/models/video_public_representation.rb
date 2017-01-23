@@ -24,24 +24,56 @@ limitations under the License.
 require 'date'
 
 module BombBomb
-
-  class InlineResponse200Items
+  # The VideoPublicRepresentation class
+  class VideoPublicRepresentation
+    # The id of the video
     attr_accessor :id
 
-    attr_accessor :name
-
+    # The is of the owning user
     attr_accessor :user_id
 
+    # The status of the video
+    attr_accessor :status
+
+    # The name of the video
+    attr_accessor :name
+
+    # A description of the video
+    attr_accessor :description
+
+    # The url of the thumbnail for the video
     attr_accessor :thumb_url
+
+    # Urls to different formats of the video
+    attr_accessor :video_urls
+
+    # The url to use to link to the video
+    attr_accessor :short_url
+
+    # The height of the video in pixels
+    attr_accessor :height
+
+    # The width of the video in pixels
+    attr_accessor :width
+
+    # The date the video was uploaded
+    attr_accessor :upload_date
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'name' => :'name',
         :'user_id' => :'userId',
-        :'thumb_url' => :'thumbUrl'
+        :'status' => :'status',
+        :'name' => :'name',
+        :'description' => :'description',
+        :'thumb_url' => :'thumbUrl',
+        :'video_urls' => :'videoUrls',
+        :'short_url' => :'shortUrl',
+        :'height' => :'height',
+        :'width' => :'width',
+        :'upload_date' => :'uploadDate'
       }
     end
 
@@ -49,9 +81,16 @@ module BombBomb
     def self.swagger_types
       {
         :'id' => :'String',
-        :'name' => :'String',
         :'user_id' => :'String',
-        :'thumb_url' => :'String'
+        :'status' => :'String',
+        :'name' => :'String',
+        :'description' => :'String',
+        :'thumb_url' => :'String',
+        :'video_urls' => :'Array<String>',
+        :'short_url' => :'String',
+        :'height' => :'Integer',
+        :'width' => :'Integer',
+        :'upload_date' => :'String'
       }
     end
 
@@ -67,16 +106,46 @@ module BombBomb
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
       if attributes.has_key?(:'userId')
         self.user_id = attributes[:'userId']
       end
 
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
+      end
+
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.has_key?(:'description')
+        self.description = attributes[:'description']
+      end
+
       if attributes.has_key?(:'thumbUrl')
         self.thumb_url = attributes[:'thumbUrl']
+      end
+
+      if attributes.has_key?(:'videoUrls')
+        if (value = attributes[:'videoUrls']).is_a?(Array)
+          self.video_urls = value
+        end
+      end
+
+      if attributes.has_key?(:'shortUrl')
+        self.short_url = attributes[:'shortUrl']
+      end
+
+      if attributes.has_key?(:'height')
+        self.height = attributes[:'height']
+      end
+
+      if attributes.has_key?(:'width')
+        self.width = attributes[:'width']
+      end
+
+      if attributes.has_key?(:'uploadDate')
+        self.upload_date = attributes[:'uploadDate']
       end
 
     end
@@ -100,9 +169,16 @@ module BombBomb
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          name == o.name &&
           user_id == o.user_id &&
-          thumb_url == o.thumb_url
+          status == o.status &&
+          name == o.name &&
+          description == o.description &&
+          thumb_url == o.thumb_url &&
+          video_urls == o.video_urls &&
+          short_url == o.short_url &&
+          height == o.height &&
+          width == o.width &&
+          upload_date == o.upload_date
     end
 
     # @see the `==` method
@@ -114,7 +190,7 @@ module BombBomb
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, user_id, thumb_url].hash
+      [id, user_id, status, name, description, thumb_url, video_urls, short_url, height, width, upload_date].hash
     end
 
     # Builds the object from hash

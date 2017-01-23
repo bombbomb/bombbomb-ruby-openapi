@@ -24,34 +24,58 @@ limitations under the License.
 require 'date'
 
 module BombBomb
-
-  class InlineResponse200Items
-    attr_accessor :id
-
-    attr_accessor :name
-
+  # The VideoRecorderMethodResponse class
+  class VideoRecorderMethodResponse
+    # The id of the user for whom this video will be recorded
     attr_accessor :user_id
 
-    attr_accessor :thumb_url
+    # The email address of the user for whom this video will be recorded
+    attr_accessor :email
+
+    # The client_id of the user for whom this video will be recorded
+    attr_accessor :client_id
+
+    # The id of the video that will be recorded
+    attr_accessor :vid_id
+
+    # An HTML blob that displays a video recorder
+    attr_accessor :content
+
+    # The width of the video recorder
+    attr_accessor :width
+
+    # the Height of the video recorder
+    attr_accessor :height
+
+    # Whether communication from the recorder will be handled via HTTPS (always true)
+    attr_accessor :https
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'name' => :'name',
-        :'user_id' => :'userId',
-        :'thumb_url' => :'thumbUrl'
+        :'user_id' => :'user_id',
+        :'email' => :'email',
+        :'client_id' => :'client_id',
+        :'vid_id' => :'vid_id',
+        :'content' => :'content',
+        :'width' => :'width',
+        :'height' => :'height',
+        :'https' => :'https'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'String',
-        :'name' => :'String',
         :'user_id' => :'String',
-        :'thumb_url' => :'String'
+        :'email' => :'String',
+        :'client_id' => :'String',
+        :'vid_id' => :'String',
+        :'content' => :'String',
+        :'width' => :'Integer',
+        :'height' => :'Integer',
+        :'https' => :'BOOLEAN'
       }
     end
 
@@ -63,20 +87,36 @@ module BombBomb
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.has_key?(:'user_id')
+        self.user_id = attributes[:'user_id']
       end
 
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.has_key?(:'email')
+        self.email = attributes[:'email']
       end
 
-      if attributes.has_key?(:'userId')
-        self.user_id = attributes[:'userId']
+      if attributes.has_key?(:'client_id')
+        self.client_id = attributes[:'client_id']
       end
 
-      if attributes.has_key?(:'thumbUrl')
-        self.thumb_url = attributes[:'thumbUrl']
+      if attributes.has_key?(:'vid_id')
+        self.vid_id = attributes[:'vid_id']
+      end
+
+      if attributes.has_key?(:'content')
+        self.content = attributes[:'content']
+      end
+
+      if attributes.has_key?(:'width')
+        self.width = attributes[:'width']
+      end
+
+      if attributes.has_key?(:'height')
+        self.height = attributes[:'height']
+      end
+
+      if attributes.has_key?(:'https')
+        self.https = attributes[:'https']
       end
 
     end
@@ -99,10 +139,14 @@ module BombBomb
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          name == o.name &&
           user_id == o.user_id &&
-          thumb_url == o.thumb_url
+          email == o.email &&
+          client_id == o.client_id &&
+          vid_id == o.vid_id &&
+          content == o.content &&
+          width == o.width &&
+          height == o.height &&
+          https == o.https
     end
 
     # @see the `==` method
@@ -114,7 +158,7 @@ module BombBomb
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, user_id, thumb_url].hash
+      [user_id, email, client_id, vid_id, content, width, height, https].hash
     end
 
     # Builds the object from hash

@@ -24,34 +24,28 @@ limitations under the License.
 require 'date'
 
 module BombBomb
+  # The SignUploadResponse class
+  class SignUploadResponse
+    # Base64 encoded policy.
+    attr_accessor :policy
 
-  class InlineResponse200Items
-    attr_accessor :id
-
-    attr_accessor :name
-
-    attr_accessor :user_id
-
-    attr_accessor :thumb_url
+    # Signature for policy.
+    attr_accessor :signature
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'name' => :'name',
-        :'user_id' => :'userId',
-        :'thumb_url' => :'thumbUrl'
+        :'policy' => :'policy',
+        :'signature' => :'signature'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'String',
-        :'name' => :'String',
-        :'user_id' => :'String',
-        :'thumb_url' => :'String'
+        :'policy' => :'String',
+        :'signature' => :'String'
       }
     end
 
@@ -63,20 +57,12 @@ module BombBomb
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.has_key?(:'policy')
+        self.policy = attributes[:'policy']
       end
 
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'userId')
-        self.user_id = attributes[:'userId']
-      end
-
-      if attributes.has_key?(:'thumbUrl')
-        self.thumb_url = attributes[:'thumbUrl']
+      if attributes.has_key?(:'signature')
+        self.signature = attributes[:'signature']
       end
 
     end
@@ -99,10 +85,8 @@ module BombBomb
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          name == o.name &&
-          user_id == o.user_id &&
-          thumb_url == o.thumb_url
+          policy == o.policy &&
+          signature == o.signature
     end
 
     # @see the `==` method
@@ -114,7 +98,7 @@ module BombBomb
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, user_id, thumb_url].hash
+      [policy, signature].hash
     end
 
     # Builds the object from hash

@@ -24,38 +24,43 @@ limitations under the License.
 require "uri"
 
 module BombBomb
-  class CurriculumApi
+  class AutomationsApi
     attr_accessor :api_client
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
 
-    # Get Curricula
-    # Get Curricula, optionally with progress included.
+    # Get Automation Email Stats
+    # Get Automation Email Stats
+    # @param drip_id The id of the drip
+    # @param drip_drop_id The id of the drip drop
     # @param [Hash] opts the optional parameters
-    # @option opts [BOOLEAN] :include_progress Whether to return progress with the curriculum.
-    # @return [Array<Curriculum>]
-    def get_curricula(opts = {})
-      data, _status_code, _headers = get_curricula_with_http_info(opts)
-      return data
+    # @return [nil]
+    def get_drip_drop_stats(drip_id, drip_drop_id, opts = {})
+      get_drip_drop_stats_with_http_info(drip_id, drip_drop_id, opts)
+      return nil
     end
 
-    # Get Curricula
-    # Get Curricula, optionally with progress included.
+    # Get Automation Email Stats
+    # Get Automation Email Stats
+    # @param drip_id The id of the drip
+    # @param drip_drop_id The id of the drip drop
     # @param [Hash] opts the optional parameters
-    # @option opts [BOOLEAN] :include_progress Whether to return progress with the curriculum.
-    # @return [Array<(Array<Curriculum>, Fixnum, Hash)>] Array<Curriculum> data, response status code and response headers
-    def get_curricula_with_http_info(opts = {})
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def get_drip_drop_stats_with_http_info(drip_id, drip_drop_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: CurriculumApi.get_curricula ..."
+        @api_client.config.logger.debug "Calling API: AutomationsApi.get_drip_drop_stats ..."
       end
+      # verify the required parameter 'drip_id' is set
+      fail ArgumentError, "Missing the required parameter 'drip_id' when calling AutomationsApi.get_drip_drop_stats" if drip_id.nil?
+      # verify the required parameter 'drip_drop_id' is set
+      fail ArgumentError, "Missing the required parameter 'drip_drop_id' when calling AutomationsApi.get_drip_drop_stats" if drip_drop_id.nil?
       # resource path
-      local_var_path = "/curricula/".sub('{format}','json')
+      local_var_path = "/automation/{dripId}/dripdrop/{dripDropId}/stats".sub('{format}','json').sub('{' + 'dripId' + '}', drip_id.to_s).sub('{' + 'dripDropId' + '}', drip_drop_id.to_s)
 
       # query parameters
       query_params = {}
-      query_params[:'includeProgress'] = opts[:'include_progress'] if !opts[:'include_progress'].nil?
 
       # header parameters
       header_params = {}
@@ -79,33 +84,36 @@ module BombBomb
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names,
-        :return_type => 'Array<Curriculum>')
+        :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CurriculumApi#get_curricula\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: AutomationsApi#get_drip_drop_stats\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Get Detailed For User
-    # Get all curricula for user including progress for each curriculum.
+    # Get Automation Stats
+    # Get Automation Stats
+    # @param id The id of the automation
     # @param [Hash] opts the optional parameters
-    # @return [Array<CurriculumWithProgress>]
-    def get_user_curriculum_with_progress(opts = {})
-      data, _status_code, _headers = get_user_curriculum_with_progress_with_http_info(opts)
-      return data
+    # @return [nil]
+    def get_drip_stats(id, opts = {})
+      get_drip_stats_with_http_info(id, opts)
+      return nil
     end
 
-    # Get Detailed For User
-    # Get all curricula for user including progress for each curriculum.
+    # Get Automation Stats
+    # Get Automation Stats
+    # @param id The id of the automation
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Array<CurriculumWithProgress>, Fixnum, Hash)>] Array<CurriculumWithProgress> data, response status code and response headers
-    def get_user_curriculum_with_progress_with_http_info(opts = {})
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def get_drip_stats_with_http_info(id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: CurriculumApi.get_user_curriculum_with_progress ..."
+        @api_client.config.logger.debug "Calling API: AutomationsApi.get_drip_stats ..."
       end
+      # verify the required parameter 'id' is set
+      fail ArgumentError, "Missing the required parameter 'id' when calling AutomationsApi.get_drip_stats" if id.nil?
       # resource path
-      local_var_path = "/curriculum/getForUserWithProgress".sub('{format}','json')
+      local_var_path = "/automation/{id}/stats".sub('{format}','json').sub('{' + 'id' + '}', id.to_s)
 
       # query parameters
       query_params = {}
@@ -132,10 +140,9 @@ module BombBomb
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names,
-        :return_type => 'Array<CurriculumWithProgress>')
+        :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CurriculumApi#get_user_curriculum_with_progress\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: AutomationsApi#get_drip_stats\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
