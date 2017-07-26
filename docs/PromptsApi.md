@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 # **create_prompt_bot**
-> PromptBotBot create_prompt_bot(list_id, email_id, end_date, prompt_subject, prompt_body, bot_type_id, template_id)
+> PromptBot create_prompt_bot(list_id, email_id, name, subject, content, contact_field_value_column, bot_type_id, template_id, opts)
 
 Create a running Prompt Bot for a list
 
@@ -39,20 +39,26 @@ list_id = "list_id_example" # String | The list id to attach the bot to.
 
 email_id = "email_id_example" # String | The default email to use.
 
-end_date = "end_date_example" # String | The time frame to complete sending to the list.
+name = "name_example" # String | The name of the bot.
 
-prompt_subject = "prompt_subject_example" # String | The prompt subject.
+subject = "subject_example" # String | The subject of the default email.
 
-prompt_body = "prompt_body_example" # String | The prompt script.
+content = "content_example" # String | The content used in the email.
+
+contact_field_value_column = "contact_field_value_column_example" # String | The custom field value column with dates for this bot.
 
 bot_type_id = "bot_type_id_example" # String | The type of bot to create.
 
 template_id = "template_id_example" # String | The template used to create the email id.
 
+opts = { 
+  video_id: "video_id_example", # String | The video used in the email.
+  end_date: "end_date_example" # String | The time frame to complete sending to the list.
+}
 
 begin
   #Create a running Prompt Bot for a list
-  result = api_instance.create_prompt_bot(list_id, email_id, end_date, prompt_subject, prompt_body, bot_type_id, template_id)
+  result = api_instance.create_prompt_bot(list_id, email_id, name, subject, content, contact_field_value_column, bot_type_id, template_id, opts)
   p result
 rescue BombBomb::ApiError => e
   puts "Exception when calling PromptsApi->create_prompt_bot: #{e}"
@@ -65,15 +71,18 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **list_id** | **String**| The list id to attach the bot to. | 
  **email_id** | **String**| The default email to use. | 
- **end_date** | **String**| The time frame to complete sending to the list. | 
- **prompt_subject** | **String**| The prompt subject. | 
- **prompt_body** | **String**| The prompt script. | 
+ **name** | **String**| The name of the bot. | 
+ **subject** | **String**| The subject of the default email. | 
+ **content** | **String**| The content used in the email. | 
+ **contact_field_value_column** | **String**| The custom field value column with dates for this bot. | 
  **bot_type_id** | **String**| The type of bot to create. | 
  **template_id** | **String**| The template used to create the email id. | 
+ **video_id** | **String**| The video used in the email. | [optional] 
+ **end_date** | **String**| The time frame to complete sending to the list. | [optional] 
 
 ### Return type
 
-[**PromptBotBot**](PromptBotBot.md)
+[**PromptBot**](PromptBot.md)
 
 ### Authorization
 
@@ -185,7 +194,7 @@ This endpoint does not need any parameter.
 
 
 # **get_prompt_bots**
-> Array&lt;PromptBotBot&gt; get_prompt_bots
+> Array&lt;PromptBot&gt; get_prompt_bots
 
 List Prompt Bots
 
@@ -217,7 +226,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Array&lt;PromptBotBot&gt;**](PromptBotBot.md)
+[**Array&lt;PromptBot&gt;**](PromptBot.md)
 
 ### Authorization
 
@@ -389,11 +398,12 @@ api_instance = BombBomb::PromptsApi.new
 
 id = "id_example" # String | The id of the prompt.
 
-choice = "choice_example" # String | The users' selection. Can be: WithVideo, WithEmail, Cancel
+choice = "choice_example" # String | The users' selection. Can be: WithVideo, WithEmail, Cancel, Restore, Reset, Manual
 
 opts = { 
   video_id: "video_id_example", # String | The id of the video.
-  email_id: "email_id_example" # String | The id of the video.
+  email_id: "email_id_example", # String | The id of the email.
+  subject: "subject_example" # String | The subject of the email
 }
 
 begin
@@ -410,9 +420,10 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| The id of the prompt. | 
- **choice** | **String**| The users&#39; selection. Can be: WithVideo, WithEmail, Cancel | 
+ **choice** | **String**| The users&#39; selection. Can be: WithVideo, WithEmail, Cancel, Restore, Reset, Manual | 
  **video_id** | **String**| The id of the video. | [optional] 
- **email_id** | **String**| The id of the video. | [optional] 
+ **email_id** | **String**| The id of the email. | [optional] 
+ **subject** | **String**| The subject of the email | [optional] 
 
 ### Return type
 
@@ -430,7 +441,7 @@ No authorization required
 
 
 # **update_prompt_bot**
-> PromptBotBot update_prompt_bot(id, opts)
+> PromptBot update_prompt_bot(id, list_id, email_id, name, subject, content, contact_field_value_column, template_id, opts)
 
 Update Prompt Bot
 
@@ -450,15 +461,29 @@ api_instance = BombBomb::PromptsApi.new
 
 id = "id_example" # String | The bot id.
 
+list_id = "list_id_example" # String | The list id to attach the bot to.
+
+email_id = "email_id_example" # String | The default email to use.
+
+name = "name_example" # String | The name of the bot.
+
+subject = "subject_example" # String | The subject of the default email.
+
+content = "content_example" # String | The content used in the default email.
+
+contact_field_value_column = "contact_field_value_column_example" # String | The custom field value column with dates for this bot.
+
+template_id = "template_id_example" # String | The template used to create the email id.
+
 opts = { 
-  email_id: "email_id_example", # String | The default email to use.
+  video_id: "video_id_example", # String | The video used in the default email.
   end_date: "end_date_example", # String | The time frame to complete sending to the list.
   status: "status_example" # String | The status of the bot.
 }
 
 begin
   #Update Prompt Bot
-  result = api_instance.update_prompt_bot(id, opts)
+  result = api_instance.update_prompt_bot(id, list_id, email_id, name, subject, content, contact_field_value_column, template_id, opts)
   p result
 rescue BombBomb::ApiError => e
   puts "Exception when calling PromptsApi->update_prompt_bot: #{e}"
@@ -470,13 +495,20 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| The bot id. | 
- **email_id** | **String**| The default email to use. | [optional] 
+ **list_id** | **String**| The list id to attach the bot to. | 
+ **email_id** | **String**| The default email to use. | 
+ **name** | **String**| The name of the bot. | 
+ **subject** | **String**| The subject of the default email. | 
+ **content** | **String**| The content used in the default email. | 
+ **contact_field_value_column** | **String**| The custom field value column with dates for this bot. | 
+ **template_id** | **String**| The template used to create the email id. | 
+ **video_id** | **String**| The video used in the default email. | [optional] 
  **end_date** | **String**| The time frame to complete sending to the list. | [optional] 
  **status** | **String**| The status of the bot. | [optional] 
 
 ### Return type
 
-[**PromptBotBot**](PromptBotBot.md)
+[**PromptBot**](PromptBot.md)
 
 ### Authorization
 
@@ -513,7 +545,8 @@ client_group_id = "client_group_id_example" # String | The client group of the c
 opts = { 
   branded_template_id: "branded_template_id_example", # String | The template to use for branded feel emails.
   personal_template_id: "personal_template_id_example", # String | The template to use for personal feel emails.
-  enabled: true # BOOLEAN | Set whether the user is able to start receiving prompts.
+  enabled: true, # BOOLEAN | Set whether the user is able to start receiving prompts.
+  auto_shares: "auto_shares_example" # String | These are what we are autosharing to
 }
 
 begin
@@ -532,6 +565,7 @@ Name | Type | Description  | Notes
  **branded_template_id** | **String**| The template to use for branded feel emails. | [optional] 
  **personal_template_id** | **String**| The template to use for personal feel emails. | [optional] 
  **enabled** | **BOOLEAN**| Set whether the user is able to start receiving prompts. | [optional] 
+ **auto_shares** | **String**| These are what we are autosharing to | [optional] 
 
 ### Return type
 

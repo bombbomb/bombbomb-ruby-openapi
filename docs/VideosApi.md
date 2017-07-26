@@ -4,9 +4,62 @@ All URIs are relative to *https://api.bombbomb.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**get_video_encoding_status**](VideosApi.md#get_video_encoding_status) | **GET** /videos/{videoId}/status | Video Encoding Status
 [**get_video_recorder**](VideosApi.md#get_video_recorder) | **GET** /videos/live/getRecorder | Get Live Video Recorder HTML
 [**mark_live_recording_complete**](VideosApi.md#mark_live_recording_complete) | **POST** /videos/live/markComplete | Completes a live recording
 [**sign_upload**](VideosApi.md#sign_upload) | **POST** /video/signedUpload | Generate Signed Url
+
+
+# **get_video_encoding_status**
+> VideoEncodingStatusResponse get_video_encoding_status(video_id)
+
+Video Encoding Status
+
+Get information about the current state of encoding for a given video id.
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::VideosApi.new
+
+video_id = "video_id_example" # String | The video's id.
+
+
+begin
+  #Video Encoding Status
+  result = api_instance.get_video_encoding_status(video_id)
+  p result
+rescue BombBomb::ApiError => e
+  puts "Exception when calling VideosApi->get_video_encoding_status: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **video_id** | **String**| The video&#39;s id. | 
+
+### Return type
+
+[**VideoEncodingStatusResponse**](VideoEncodingStatusResponse.md)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
 
 
 # **get_video_recorder**

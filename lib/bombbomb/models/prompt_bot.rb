@@ -24,70 +24,72 @@ limitations under the License.
 require 'date'
 
 module BombBomb
-
-  class JerichoConfiguration
+  # The Prompt\\Bot class
+  class PromptBot
+    # The identifier of the prompt bot. Read Only.
     attr_accessor :id
 
-    attr_accessor :client_group_id
+    # The prompt bot's owner. Read Only.
+    attr_accessor :user_id
 
-    # When the email should be sent.
-    attr_accessor :send_date
-
-    # Video Prompt: Determines whether this is a static or prompted send.
-    attr_accessor :is_prompt
-
-    # Controls whether or not the content is printed into a template.
-    attr_accessor :print_to_template
-
-    # Static send: The Email to send on behalf of the group members.
+    # The default email being sent to contacts in the prompt bot list.
     attr_accessor :email_id
 
-    # Video Prompt: The Video to include as an example for prompted users.
-    attr_accessor :example_video_id
+    # The list to attach the Prompt Bot to.
+    attr_accessor :list_id
 
-    # The Video to include in the tracking follow up.
-    attr_accessor :follow_up_video_id
+    # The name of the bot.
+    attr_accessor :name
 
-    # Video Prompt: The intro text directed toward prompted users.
-    attr_accessor :prompt_intro
+    # The custom contact field value column used for this bot.
+    attr_accessor :contact_field_value_column
 
-    # Video Prompt: The subject line prompting the user to record a video.
-    attr_accessor :prompt_subject
-
-    # Video Prompt: The HTML body of the email prompting the user to record a video.
-    attr_accessor :prompt_body
-
-    # Video Prompt: The subject line of the final sent email
-    attr_accessor :email_subject
-
-    # Video Prompt: The HTML body of the final sent email.
-    attr_accessor :email_body
-
-    # Video Prompt: Whether to send the final email if no video was recorded.
-    attr_accessor :send_without_video
-
-    # The state of the send.
+    # The status of the prompt bot. Read Only.
     attr_accessor :status
+
+    # when the bot started
+    attr_accessor :start_date
+
+    # when the bot should finish
+    attr_accessor :end_date
+
+    # The type of bot.
+    attr_accessor :bot_type_id
+
+    # The template id used to generate the default email.
+    attr_accessor :template_id
+
+    # The video that was added to the prompt.
+    attr_accessor :video_id
+
+    # The content to use in the email.
+    attr_accessor :content
+
+    # The subject of the default email.
+    attr_accessor :subject
+
+    # Set when generated as a default by a bot.
+    attr_accessor :generated_by
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'client_group_id' => :'clientGroupId',
-        :'send_date' => :'sendDate',
-        :'is_prompt' => :'isPrompt',
-        :'print_to_template' => :'printToTemplate',
+        :'user_id' => :'userId',
         :'email_id' => :'emailId',
-        :'example_video_id' => :'exampleVideoId',
-        :'follow_up_video_id' => :'followUpVideoId',
-        :'prompt_intro' => :'promptIntro',
-        :'prompt_subject' => :'promptSubject',
-        :'prompt_body' => :'promptBody',
-        :'email_subject' => :'emailSubject',
-        :'email_body' => :'emailBody',
-        :'send_without_video' => :'sendWithoutVideo',
-        :'status' => :'status'
+        :'list_id' => :'listId',
+        :'name' => :'name',
+        :'contact_field_value_column' => :'contactFieldValueColumn',
+        :'status' => :'status',
+        :'start_date' => :'startDate',
+        :'end_date' => :'endDate',
+        :'bot_type_id' => :'botTypeId',
+        :'template_id' => :'templateId',
+        :'video_id' => :'videoId',
+        :'content' => :'content',
+        :'subject' => :'subject',
+        :'generated_by' => :'generatedBy'
       }
     end
 
@@ -95,20 +97,20 @@ module BombBomb
     def self.swagger_types
       {
         :'id' => :'String',
-        :'client_group_id' => :'String',
-        :'send_date' => :'DateTime',
-        :'is_prompt' => :'BOOLEAN',
-        :'print_to_template' => :'BOOLEAN',
+        :'user_id' => :'String',
         :'email_id' => :'String',
-        :'example_video_id' => :'String',
-        :'follow_up_video_id' => :'String',
-        :'prompt_intro' => :'String',
-        :'prompt_subject' => :'String',
-        :'prompt_body' => :'String',
-        :'email_subject' => :'String',
-        :'email_body' => :'String',
-        :'send_without_video' => :'BOOLEAN',
-        :'status' => :'String'
+        :'list_id' => :'String',
+        :'name' => :'String',
+        :'contact_field_value_column' => :'String',
+        :'status' => :'Integer',
+        :'start_date' => :'DateTime',
+        :'end_date' => :'DateTime',
+        :'bot_type_id' => :'String',
+        :'template_id' => :'String',
+        :'video_id' => :'String',
+        :'content' => :'String',
+        :'subject' => :'String',
+        :'generated_by' => :'String'
       }
     end
 
@@ -124,60 +126,60 @@ module BombBomb
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'clientGroupId')
-        self.client_group_id = attributes[:'clientGroupId']
-      end
-
-      if attributes.has_key?(:'sendDate')
-        self.send_date = attributes[:'sendDate']
-      end
-
-      if attributes.has_key?(:'isPrompt')
-        self.is_prompt = attributes[:'isPrompt']
-      end
-
-      if attributes.has_key?(:'printToTemplate')
-        self.print_to_template = attributes[:'printToTemplate']
+      if attributes.has_key?(:'userId')
+        self.user_id = attributes[:'userId']
       end
 
       if attributes.has_key?(:'emailId')
         self.email_id = attributes[:'emailId']
       end
 
-      if attributes.has_key?(:'exampleVideoId')
-        self.example_video_id = attributes[:'exampleVideoId']
+      if attributes.has_key?(:'listId')
+        self.list_id = attributes[:'listId']
       end
 
-      if attributes.has_key?(:'followUpVideoId')
-        self.follow_up_video_id = attributes[:'followUpVideoId']
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'promptIntro')
-        self.prompt_intro = attributes[:'promptIntro']
-      end
-
-      if attributes.has_key?(:'promptSubject')
-        self.prompt_subject = attributes[:'promptSubject']
-      end
-
-      if attributes.has_key?(:'promptBody')
-        self.prompt_body = attributes[:'promptBody']
-      end
-
-      if attributes.has_key?(:'emailSubject')
-        self.email_subject = attributes[:'emailSubject']
-      end
-
-      if attributes.has_key?(:'emailBody')
-        self.email_body = attributes[:'emailBody']
-      end
-
-      if attributes.has_key?(:'sendWithoutVideo')
-        self.send_without_video = attributes[:'sendWithoutVideo']
+      if attributes.has_key?(:'contactFieldValueColumn')
+        self.contact_field_value_column = attributes[:'contactFieldValueColumn']
       end
 
       if attributes.has_key?(:'status')
         self.status = attributes[:'status']
+      end
+
+      if attributes.has_key?(:'startDate')
+        self.start_date = attributes[:'startDate']
+      end
+
+      if attributes.has_key?(:'endDate')
+        self.end_date = attributes[:'endDate']
+      end
+
+      if attributes.has_key?(:'botTypeId')
+        self.bot_type_id = attributes[:'botTypeId']
+      end
+
+      if attributes.has_key?(:'templateId')
+        self.template_id = attributes[:'templateId']
+      end
+
+      if attributes.has_key?(:'videoId')
+        self.video_id = attributes[:'videoId']
+      end
+
+      if attributes.has_key?(:'content')
+        self.content = attributes[:'content']
+      end
+
+      if attributes.has_key?(:'subject')
+        self.subject = attributes[:'subject']
+      end
+
+      if attributes.has_key?(:'generatedBy')
+        self.generated_by = attributes[:'generatedBy']
       end
 
     end
@@ -192,7 +194,6 @@ module BombBomb
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @is_prompt.nil?
       return true
     end
 
@@ -202,20 +203,20 @@ module BombBomb
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          client_group_id == o.client_group_id &&
-          send_date == o.send_date &&
-          is_prompt == o.is_prompt &&
-          print_to_template == o.print_to_template &&
+          user_id == o.user_id &&
           email_id == o.email_id &&
-          example_video_id == o.example_video_id &&
-          follow_up_video_id == o.follow_up_video_id &&
-          prompt_intro == o.prompt_intro &&
-          prompt_subject == o.prompt_subject &&
-          prompt_body == o.prompt_body &&
-          email_subject == o.email_subject &&
-          email_body == o.email_body &&
-          send_without_video == o.send_without_video &&
-          status == o.status
+          list_id == o.list_id &&
+          name == o.name &&
+          contact_field_value_column == o.contact_field_value_column &&
+          status == o.status &&
+          start_date == o.start_date &&
+          end_date == o.end_date &&
+          bot_type_id == o.bot_type_id &&
+          template_id == o.template_id &&
+          video_id == o.video_id &&
+          content == o.content &&
+          subject == o.subject &&
+          generated_by == o.generated_by
     end
 
     # @see the `==` method
@@ -227,7 +228,7 @@ module BombBomb
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, client_group_id, send_date, is_prompt, print_to_template, email_id, example_video_id, follow_up_video_id, prompt_intro, prompt_subject, prompt_body, email_subject, email_body, send_without_video, status].hash
+      [id, user_id, email_id, list_id, name, contact_field_value_column, status, start_date, end_date, bot_type_id, template_id, video_id, content, subject, generated_by].hash
     end
 
     # Builds the object from hash

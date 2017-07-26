@@ -24,91 +24,33 @@ limitations under the License.
 require 'date'
 
 module BombBomb
+  # The VideoEncodingStatusResponse class
+  class VideoEncodingStatusResponse
+    # Returns true if the video is done encoding and finalized.
+    attr_accessor :is_ready
 
-  class JerichoConfiguration
-    attr_accessor :id
+    # Returns true if the video encoding process failed.
+    attr_accessor :is_failed
 
-    attr_accessor :client_group_id
-
-    # When the email should be sent.
-    attr_accessor :send_date
-
-    # Video Prompt: Determines whether this is a static or prompted send.
-    attr_accessor :is_prompt
-
-    # Controls whether or not the content is printed into a template.
-    attr_accessor :print_to_template
-
-    # Static send: The Email to send on behalf of the group members.
-    attr_accessor :email_id
-
-    # Video Prompt: The Video to include as an example for prompted users.
-    attr_accessor :example_video_id
-
-    # The Video to include in the tracking follow up.
-    attr_accessor :follow_up_video_id
-
-    # Video Prompt: The intro text directed toward prompted users.
-    attr_accessor :prompt_intro
-
-    # Video Prompt: The subject line prompting the user to record a video.
-    attr_accessor :prompt_subject
-
-    # Video Prompt: The HTML body of the email prompting the user to record a video.
-    attr_accessor :prompt_body
-
-    # Video Prompt: The subject line of the final sent email
-    attr_accessor :email_subject
-
-    # Video Prompt: The HTML body of the final sent email.
-    attr_accessor :email_body
-
-    # Video Prompt: Whether to send the final email if no video was recorded.
-    attr_accessor :send_without_video
-
-    # The state of the send.
-    attr_accessor :status
+    # 0-100 value indicating progress of video encoding process.
+    attr_accessor :progress
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'client_group_id' => :'clientGroupId',
-        :'send_date' => :'sendDate',
-        :'is_prompt' => :'isPrompt',
-        :'print_to_template' => :'printToTemplate',
-        :'email_id' => :'emailId',
-        :'example_video_id' => :'exampleVideoId',
-        :'follow_up_video_id' => :'followUpVideoId',
-        :'prompt_intro' => :'promptIntro',
-        :'prompt_subject' => :'promptSubject',
-        :'prompt_body' => :'promptBody',
-        :'email_subject' => :'emailSubject',
-        :'email_body' => :'emailBody',
-        :'send_without_video' => :'sendWithoutVideo',
-        :'status' => :'status'
+        :'is_ready' => :'isReady',
+        :'is_failed' => :'isFailed',
+        :'progress' => :'progress'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'String',
-        :'client_group_id' => :'String',
-        :'send_date' => :'DateTime',
-        :'is_prompt' => :'BOOLEAN',
-        :'print_to_template' => :'BOOLEAN',
-        :'email_id' => :'String',
-        :'example_video_id' => :'String',
-        :'follow_up_video_id' => :'String',
-        :'prompt_intro' => :'String',
-        :'prompt_subject' => :'String',
-        :'prompt_body' => :'String',
-        :'email_subject' => :'String',
-        :'email_body' => :'String',
-        :'send_without_video' => :'BOOLEAN',
-        :'status' => :'String'
+        :'is_ready' => :'BOOLEAN',
+        :'is_failed' => :'BOOLEAN',
+        :'progress' => :'Integer'
       }
     end
 
@@ -120,64 +62,16 @@ module BombBomb
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.has_key?(:'isReady')
+        self.is_ready = attributes[:'isReady']
       end
 
-      if attributes.has_key?(:'clientGroupId')
-        self.client_group_id = attributes[:'clientGroupId']
+      if attributes.has_key?(:'isFailed')
+        self.is_failed = attributes[:'isFailed']
       end
 
-      if attributes.has_key?(:'sendDate')
-        self.send_date = attributes[:'sendDate']
-      end
-
-      if attributes.has_key?(:'isPrompt')
-        self.is_prompt = attributes[:'isPrompt']
-      end
-
-      if attributes.has_key?(:'printToTemplate')
-        self.print_to_template = attributes[:'printToTemplate']
-      end
-
-      if attributes.has_key?(:'emailId')
-        self.email_id = attributes[:'emailId']
-      end
-
-      if attributes.has_key?(:'exampleVideoId')
-        self.example_video_id = attributes[:'exampleVideoId']
-      end
-
-      if attributes.has_key?(:'followUpVideoId')
-        self.follow_up_video_id = attributes[:'followUpVideoId']
-      end
-
-      if attributes.has_key?(:'promptIntro')
-        self.prompt_intro = attributes[:'promptIntro']
-      end
-
-      if attributes.has_key?(:'promptSubject')
-        self.prompt_subject = attributes[:'promptSubject']
-      end
-
-      if attributes.has_key?(:'promptBody')
-        self.prompt_body = attributes[:'promptBody']
-      end
-
-      if attributes.has_key?(:'emailSubject')
-        self.email_subject = attributes[:'emailSubject']
-      end
-
-      if attributes.has_key?(:'emailBody')
-        self.email_body = attributes[:'emailBody']
-      end
-
-      if attributes.has_key?(:'sendWithoutVideo')
-        self.send_without_video = attributes[:'sendWithoutVideo']
-      end
-
-      if attributes.has_key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.has_key?(:'progress')
+        self.progress = attributes[:'progress']
       end
 
     end
@@ -192,7 +86,6 @@ module BombBomb
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @is_prompt.nil?
       return true
     end
 
@@ -201,21 +94,9 @@ module BombBomb
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          client_group_id == o.client_group_id &&
-          send_date == o.send_date &&
-          is_prompt == o.is_prompt &&
-          print_to_template == o.print_to_template &&
-          email_id == o.email_id &&
-          example_video_id == o.example_video_id &&
-          follow_up_video_id == o.follow_up_video_id &&
-          prompt_intro == o.prompt_intro &&
-          prompt_subject == o.prompt_subject &&
-          prompt_body == o.prompt_body &&
-          email_subject == o.email_subject &&
-          email_body == o.email_body &&
-          send_without_video == o.send_without_video &&
-          status == o.status
+          is_ready == o.is_ready &&
+          is_failed == o.is_failed &&
+          progress == o.progress
     end
 
     # @see the `==` method
@@ -227,7 +108,7 @@ module BombBomb
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, client_group_id, send_date, is_prompt, print_to_template, email_id, example_video_id, follow_up_video_id, prompt_intro, prompt_subject, prompt_body, email_subject, email_body, send_without_video, status].hash
+      [is_ready, is_failed, progress].hash
     end
 
     # Builds the object from hash

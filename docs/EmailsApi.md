@@ -11,11 +11,11 @@ Method | HTTP request | Description
 
 
 # **create_printing_press_email**
-> create_printing_press_email(template_id, content, replace, opts)
+> create_printing_press_email(template_id, content, opts)
 
 Create an Email with Printing Press
 
-Prints an email using the template id and content to the users account.If a video id, is include it will replace any video placeholders with that video.
+Prints an email using the template id and content to the users account.If a video id is included, it will replace any video placeholders with that video.
 
 ### Example
 ```ruby
@@ -33,16 +33,15 @@ template_id = "template_id_example" # String | The template id to be printed.
 
 content = "content_example" # String | The content of the email.
 
-replace = true # BOOLEAN | Set whether to replace video placeholders with video id.
-
 opts = { 
+  email_id: "email_id_example", # String | The email id to be printed to.
   video_id: "video_id_example", # String | A video to replace video place holders with.
   subject_line: "subject_line_example" # String | The subject line to be printed.
 }
 
 begin
   #Create an Email with Printing Press
-  api_instance.create_printing_press_email(template_id, content, replace, opts)
+  api_instance.create_printing_press_email(template_id, content, opts)
 rescue BombBomb::ApiError => e
   puts "Exception when calling EmailsApi->create_printing_press_email: #{e}"
 end
@@ -54,7 +53,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **String**| The template id to be printed. | 
  **content** | **String**| The content of the email. | 
- **replace** | **BOOLEAN**| Set whether to replace video placeholders with video id. | 
+ **email_id** | **String**| The email id to be printed to. | [optional] 
  **video_id** | **String**| A video to replace video place holders with. | [optional] 
  **subject_line** | **String**| The subject line to be printed. | [optional] 
 
