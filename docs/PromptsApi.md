@@ -12,12 +12,13 @@ Method | HTTP request | Description
 [**get_video_email_prompt**](PromptsApi.md#get_video_email_prompt) | **GET** /prompt/{id} | Gets a prompt
 [**get_video_email_prompts**](PromptsApi.md#get_video_email_prompts) | **GET** /prompt/ | List prompts
 [**respond_to_video_email_prompt**](PromptsApi.md#respond_to_video_email_prompt) | **POST** /prompt/{id}/response | Respond to a prompt
+[**update_prompt**](PromptsApi.md#update_prompt) | **PUT** /prompts/{id} | Update Prompt
 [**update_prompt_bot**](PromptsApi.md#update_prompt_bot) | **PUT** /prompts/bots/{id} | Update Prompt Bot
 [**update_prompt_campaign**](PromptsApi.md#update_prompt_campaign) | **PUT** /prompts/campaigns/{id} | Update Prompt Campaign
 
 
 # **create_prompt_bot**
-> PromptBot create_prompt_bot(list_id, email_id, name, subject, content, contact_field_value_column, bot_type_id, template_id, opts)
+> PromptBot create_prompt_bot(email_id, name, subject, content, contact_field_value_column, bot_type_id, template_id, opts)
 
 Create a running Prompt Bot for a list
 
@@ -35,8 +36,6 @@ end
 
 api_instance = BombBomb::PromptsApi.new
 
-list_id = "list_id_example" # String | The list id to attach the bot to.
-
 email_id = "email_id_example" # String | The default email to use.
 
 name = "name_example" # String | The name of the bot.
@@ -52,13 +51,14 @@ bot_type_id = "bot_type_id_example" # String | The type of bot to create.
 template_id = "template_id_example" # String | The template used to create the email id.
 
 opts = { 
+  list_id: "list_id_example", # String | The list id to attach the bot to.
   video_id: "video_id_example", # String | The video used in the email.
   end_date: "end_date_example" # String | The time frame to complete sending to the list.
 }
 
 begin
   #Create a running Prompt Bot for a list
-  result = api_instance.create_prompt_bot(list_id, email_id, name, subject, content, contact_field_value_column, bot_type_id, template_id, opts)
+  result = api_instance.create_prompt_bot(email_id, name, subject, content, contact_field_value_column, bot_type_id, template_id, opts)
   p result
 rescue BombBomb::ApiError => e
   puts "Exception when calling PromptsApi->create_prompt_bot: #{e}"
@@ -69,7 +69,6 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **list_id** | **String**| The list id to attach the bot to. | 
  **email_id** | **String**| The default email to use. | 
  **name** | **String**| The name of the bot. | 
  **subject** | **String**| The subject of the default email. | 
@@ -77,6 +76,7 @@ Name | Type | Description  | Notes
  **contact_field_value_column** | **String**| The custom field value column with dates for this bot. | 
  **bot_type_id** | **String**| The type of bot to create. | 
  **template_id** | **String**| The template used to create the email id. | 
+ **list_id** | **String**| The list id to attach the bot to. | [optional] 
  **video_id** | **String**| The video used in the email. | [optional] 
  **end_date** | **String**| The time frame to complete sending to the list. | [optional] 
 
@@ -440,8 +440,73 @@ No authorization required
 
 
 
+# **update_prompt**
+> update_prompt(id, opts)
+
+Update Prompt
+
+Updates a Prompt
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::PromptsApi.new
+
+id = "id_example" # String | The prompt's id
+
+opts = { 
+  send_mechanism: "send_mechanism_example", # String | The mechanism for the prompt to be sent
+  facebook_message: "facebook_message_example", # String | The facebook message assigned to the prompt
+  twitter_message: "twitter_message_example", # String | The twitter message assigned to the prompt
+  video_id: "video_id_example", # String | The id of the video.
+  email_id: "email_id_example", # String | The id of the email.
+  subject: "subject_example" # String | The subject of the email
+}
+
+begin
+  #Update Prompt
+  api_instance.update_prompt(id, opts)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling PromptsApi->update_prompt: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **String**| The prompt&#39;s id | 
+ **send_mechanism** | **String**| The mechanism for the prompt to be sent | [optional] 
+ **facebook_message** | **String**| The facebook message assigned to the prompt | [optional] 
+ **twitter_message** | **String**| The twitter message assigned to the prompt | [optional] 
+ **video_id** | **String**| The id of the video. | [optional] 
+ **email_id** | **String**| The id of the email. | [optional] 
+ **subject** | **String**| The subject of the email | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
 # **update_prompt_bot**
-> PromptBot update_prompt_bot(id, list_id, email_id, name, subject, content, contact_field_value_column, template_id, opts)
+> PromptBot update_prompt_bot(id, email_id, name, subject, content, contact_field_value_column, template_id, opts)
 
 Update Prompt Bot
 
@@ -461,8 +526,6 @@ api_instance = BombBomb::PromptsApi.new
 
 id = "id_example" # String | The bot id.
 
-list_id = "list_id_example" # String | The list id to attach the bot to.
-
 email_id = "email_id_example" # String | The default email to use.
 
 name = "name_example" # String | The name of the bot.
@@ -476,6 +539,7 @@ contact_field_value_column = "contact_field_value_column_example" # String | The
 template_id = "template_id_example" # String | The template used to create the email id.
 
 opts = { 
+  list_id: "list_id_example", # String | The list id to attach the bot to.
   video_id: "video_id_example", # String | The video used in the default email.
   end_date: "end_date_example", # String | The time frame to complete sending to the list.
   status: "status_example" # String | The status of the bot.
@@ -483,7 +547,7 @@ opts = {
 
 begin
   #Update Prompt Bot
-  result = api_instance.update_prompt_bot(id, list_id, email_id, name, subject, content, contact_field_value_column, template_id, opts)
+  result = api_instance.update_prompt_bot(id, email_id, name, subject, content, contact_field_value_column, template_id, opts)
   p result
 rescue BombBomb::ApiError => e
   puts "Exception when calling PromptsApi->update_prompt_bot: #{e}"
@@ -495,13 +559,13 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| The bot id. | 
- **list_id** | **String**| The list id to attach the bot to. | 
  **email_id** | **String**| The default email to use. | 
  **name** | **String**| The name of the bot. | 
  **subject** | **String**| The subject of the default email. | 
  **content** | **String**| The content used in the default email. | 
  **contact_field_value_column** | **String**| The custom field value column with dates for this bot. | 
  **template_id** | **String**| The template used to create the email id. | 
+ **list_id** | **String**| The list id to attach the bot to. | [optional] 
  **video_id** | **String**| The video used in the default email. | [optional] 
  **end_date** | **String**| The time frame to complete sending to the list. | [optional] 
  **status** | **String**| The status of the bot. | [optional] 
@@ -546,7 +610,7 @@ opts = {
   branded_template_id: "branded_template_id_example", # String | The template to use for branded feel emails.
   personal_template_id: "personal_template_id_example", # String | The template to use for personal feel emails.
   enabled: true, # BOOLEAN | Set whether the user is able to start receiving prompts.
-  auto_shares: "auto_shares_example" # String | These are what we are autosharing to
+  send_mechanism: "send_mechanism_example" # String | The way to send the prompt
 }
 
 begin
@@ -565,7 +629,7 @@ Name | Type | Description  | Notes
  **branded_template_id** | **String**| The template to use for branded feel emails. | [optional] 
  **personal_template_id** | **String**| The template to use for personal feel emails. | [optional] 
  **enabled** | **BOOLEAN**| Set whether the user is able to start receiving prompts. | [optional] 
- **auto_shares** | **String**| These are what we are autosharing to | [optional] 
+ **send_mechanism** | **String**| The way to send the prompt | [optional] 
 
 ### Return type
 

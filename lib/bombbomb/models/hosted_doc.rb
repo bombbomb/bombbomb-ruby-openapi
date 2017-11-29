@@ -24,70 +24,36 @@ limitations under the License.
 require 'date'
 
 module BombBomb
-
-  class JerichoConfiguration
+  # The HostedDoc class
+  class HostedDoc
+    # The doc's id.
     attr_accessor :id
 
-    attr_accessor :client_group_id
+    # The doc's owner.
+    attr_accessor :user_id
 
-    # When the email should be sent.
-    attr_accessor :send_date
+    # docs file name.
+    attr_accessor :file_name
 
-    # Video Prompt: Determines whether this is a static or prompted send.
-    attr_accessor :is_prompt
+    # The doc's short url.
+    attr_accessor :short_url
 
-    # Controls whether or not the content is printed into a template.
-    attr_accessor :print_to_template
+    # The doc's long url.
+    attr_accessor :long_url
 
-    # Static send: The Email to send on behalf of the group members.
-    attr_accessor :email_id
-
-    # Video Prompt: The Video to include as an example for prompted users.
-    attr_accessor :example_video_id
-
-    # The Video to include in the tracking follow up.
-    attr_accessor :follow_up_video_id
-
-    # Video Prompt: The intro text directed toward prompted users.
-    attr_accessor :prompt_intro
-
-    # Video Prompt: The subject line prompting the user to record a video.
-    attr_accessor :prompt_subject
-
-    # Video Prompt: The HTML body of the email prompting the user to record a video.
-    attr_accessor :prompt_body
-
-    # Video Prompt: The subject line of the final sent email
-    attr_accessor :email_subject
-
-    # Video Prompt: The HTML body of the final sent email.
-    attr_accessor :email_body
-
-    # Video Prompt: Whether to send the final email if no video was recorded.
-    attr_accessor :send_without_video
-
-    # The state of the send.
-    attr_accessor :status
+    # The doc's upload date.
+    attr_accessor :upload_date
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'client_group_id' => :'clientGroupId',
-        :'send_date' => :'sendDate',
-        :'is_prompt' => :'isPrompt',
-        :'print_to_template' => :'printToTemplate',
-        :'email_id' => :'emailId',
-        :'example_video_id' => :'exampleVideoId',
-        :'follow_up_video_id' => :'followUpVideoId',
-        :'prompt_intro' => :'promptIntro',
-        :'prompt_subject' => :'promptSubject',
-        :'prompt_body' => :'promptBody',
-        :'email_subject' => :'emailSubject',
-        :'email_body' => :'emailBody',
-        :'send_without_video' => :'sendWithoutVideo',
-        :'status' => :'status'
+        :'user_id' => :'userId',
+        :'file_name' => :'fileName',
+        :'short_url' => :'shortUrl',
+        :'long_url' => :'longUrl',
+        :'upload_date' => :'uploadDate'
       }
     end
 
@@ -95,20 +61,11 @@ module BombBomb
     def self.swagger_types
       {
         :'id' => :'String',
-        :'client_group_id' => :'String',
-        :'send_date' => :'DateTime',
-        :'is_prompt' => :'BOOLEAN',
-        :'print_to_template' => :'BOOLEAN',
-        :'email_id' => :'String',
-        :'example_video_id' => :'String',
-        :'follow_up_video_id' => :'String',
-        :'prompt_intro' => :'String',
-        :'prompt_subject' => :'String',
-        :'prompt_body' => :'String',
-        :'email_subject' => :'String',
-        :'email_body' => :'String',
-        :'send_without_video' => :'BOOLEAN',
-        :'status' => :'String'
+        :'user_id' => :'String',
+        :'file_name' => :'String',
+        :'short_url' => :'String',
+        :'long_url' => :'String',
+        :'upload_date' => :'DateTime'
       }
     end
 
@@ -124,60 +81,24 @@ module BombBomb
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'clientGroupId')
-        self.client_group_id = attributes[:'clientGroupId']
+      if attributes.has_key?(:'userId')
+        self.user_id = attributes[:'userId']
       end
 
-      if attributes.has_key?(:'sendDate')
-        self.send_date = attributes[:'sendDate']
+      if attributes.has_key?(:'fileName')
+        self.file_name = attributes[:'fileName']
       end
 
-      if attributes.has_key?(:'isPrompt')
-        self.is_prompt = attributes[:'isPrompt']
+      if attributes.has_key?(:'shortUrl')
+        self.short_url = attributes[:'shortUrl']
       end
 
-      if attributes.has_key?(:'printToTemplate')
-        self.print_to_template = attributes[:'printToTemplate']
+      if attributes.has_key?(:'longUrl')
+        self.long_url = attributes[:'longUrl']
       end
 
-      if attributes.has_key?(:'emailId')
-        self.email_id = attributes[:'emailId']
-      end
-
-      if attributes.has_key?(:'exampleVideoId')
-        self.example_video_id = attributes[:'exampleVideoId']
-      end
-
-      if attributes.has_key?(:'followUpVideoId')
-        self.follow_up_video_id = attributes[:'followUpVideoId']
-      end
-
-      if attributes.has_key?(:'promptIntro')
-        self.prompt_intro = attributes[:'promptIntro']
-      end
-
-      if attributes.has_key?(:'promptSubject')
-        self.prompt_subject = attributes[:'promptSubject']
-      end
-
-      if attributes.has_key?(:'promptBody')
-        self.prompt_body = attributes[:'promptBody']
-      end
-
-      if attributes.has_key?(:'emailSubject')
-        self.email_subject = attributes[:'emailSubject']
-      end
-
-      if attributes.has_key?(:'emailBody')
-        self.email_body = attributes[:'emailBody']
-      end
-
-      if attributes.has_key?(:'sendWithoutVideo')
-        self.send_without_video = attributes[:'sendWithoutVideo']
-      end
-
-      if attributes.has_key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.has_key?(:'uploadDate')
+        self.upload_date = attributes[:'uploadDate']
       end
 
     end
@@ -192,7 +113,6 @@ module BombBomb
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @is_prompt.nil?
       return true
     end
 
@@ -202,20 +122,11 @@ module BombBomb
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          client_group_id == o.client_group_id &&
-          send_date == o.send_date &&
-          is_prompt == o.is_prompt &&
-          print_to_template == o.print_to_template &&
-          email_id == o.email_id &&
-          example_video_id == o.example_video_id &&
-          follow_up_video_id == o.follow_up_video_id &&
-          prompt_intro == o.prompt_intro &&
-          prompt_subject == o.prompt_subject &&
-          prompt_body == o.prompt_body &&
-          email_subject == o.email_subject &&
-          email_body == o.email_body &&
-          send_without_video == o.send_without_video &&
-          status == o.status
+          user_id == o.user_id &&
+          file_name == o.file_name &&
+          short_url == o.short_url &&
+          long_url == o.long_url &&
+          upload_date == o.upload_date
     end
 
     # @see the `==` method
@@ -227,7 +138,7 @@ module BombBomb
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, client_group_id, send_date, is_prompt, print_to_template, email_id, example_video_id, follow_up_video_id, prompt_intro, prompt_subject, prompt_body, email_subject, email_body, send_without_video, status].hash
+      [id, user_id, file_name, short_url, long_url, upload_date].hash
     end
 
     # Builds the object from hash

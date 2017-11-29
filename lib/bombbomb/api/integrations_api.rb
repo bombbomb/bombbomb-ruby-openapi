@@ -24,39 +24,38 @@ limitations under the License.
 require "uri"
 
 module BombBomb
-  class OrdersApi
+  class IntegrationsApi
     attr_accessor :api_client
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
 
-    # Deletes image from user s3 store
-    # Deletes image from user s3 store
-    # @param file_name Filename for deletion
+    # Synchronize your integration list or lists.
+    # Synchronize your integration contact list with the service you are integrated with. If no integration code is provided, all integrations will be synchronized.
     # @param [Hash] opts the optional parameters
-    # @return [nil]
-    def template_asset_delete(file_name, opts = {})
-      template_asset_delete_with_http_info(file_name, opts)
-      return nil
+    # @option opts [String] :integration_id The integration to sync lists for. All integrations will sync if nothing is provided.
+    # @return [String]
+    def sync_users_integrated_lists(opts = {})
+      data, _status_code, _headers = sync_users_integrated_lists_with_http_info(opts)
+      return data
     end
 
-    # Deletes image from user s3 store
-    # Deletes image from user s3 store
-    # @param file_name Filename for deletion
+    # Synchronize your integration list or lists.
+    # Synchronize your integration contact list with the service you are integrated with. If no integration code is provided, all integrations will be synchronized.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def template_asset_delete_with_http_info(file_name, opts = {})
+    # @option opts [String] :integration_id The integration to sync lists for. All integrations will sync if nothing is provided.
+    # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
+    def sync_users_integrated_lists_with_http_info(opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: OrdersApi.template_asset_delete ..."
+        @api_client.config.logger.debug "Calling API: IntegrationsApi.sync_users_integrated_lists ..."
       end
-      # verify the required parameter 'file_name' is set
-      fail ArgumentError, "Missing the required parameter 'file_name' when calling OrdersApi.template_asset_delete" if file_name.nil?
       # resource path
-      local_var_path = "/orders/templates/images".sub('{format}','json')
+      local_var_path = "/integrations/sync".sub('{format}','json')
 
       # query parameters
       query_params = {}
+      query_params[:'integration_id'] = opts[:'integration_id'] if !opts[:'integration_id'].nil?
 
       # header parameters
       header_params = {}
@@ -71,19 +70,19 @@ module BombBomb
 
       # form parameters
       form_params = {}
-      form_params["fileName"] = file_name
 
       # http body (model)
       post_body = nil
       auth_names = ['BBOAuth2']
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'String')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: OrdersApi#template_asset_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: IntegrationsApi#sync_users_integrated_lists\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

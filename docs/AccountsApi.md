@@ -6,11 +6,12 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**account_details**](AccountsApi.md#account_details) | **GET** /accounts | Get account details.
 [**create_account**](AccountsApi.md#create_account) | **POST** /accounts | Create Account
+[**get_client_statistics**](AccountsApi.md#get_client_statistics) | **GET** /accounts/stats | Get Client Statistics
 [**subscription_purchase_allowed**](AccountsApi.md#subscription_purchase_allowed) | **GET** /accounts/purchaseable | Check if subscription purchase allowed.
 
 
 # **account_details**
-> account_details(opts)
+> account_details
 
 Get account details.
 
@@ -23,27 +24,16 @@ require 'bombbomb'
 
 api_instance = BombBomb::AccountsApi.new
 
-opts = { 
-  email: "email_example", # String | Your login email address
-  pw: "pw_example", # String | Your password
-  api_key: "api_key_example" # String | Your Api Key
-}
-
 begin
   #Get account details.
-  api_instance.account_details(opts)
+  api_instance.account_details
 rescue BombBomb::ApiError => e
   puts "Exception when calling AccountsApi->account_details: #{e}"
 end
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **email** | **String**| Your login email address | [optional] 
- **pw** | **String**| Your password | [optional] 
- **api_key** | **String**| Your Api Key | [optional] 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -96,7 +86,8 @@ opts = {
   industry: "industry_example", # String | Industry of the user.
   address: "address_example", # String | Street Address of the user.
   city: "city_example", # String | City of the user.
-  postal_code: "postal_code_example" # String | Postal/Zip code of the user.
+  postal_code: "postal_code_example", # String | Postal/Zip code of the user.
+  prevent_welcome_email: "prevent_welcome_email_example" # String | prevent an email with login credentials from being sent to the new account. must be set to 'true'
 }
 
 begin
@@ -123,6 +114,7 @@ Name | Type | Description  | Notes
  **address** | **String**| Street Address of the user. | [optional] 
  **city** | **String**| City of the user. | [optional] 
  **postal_code** | **String**| Postal/Zip code of the user. | [optional] 
+ **prevent_welcome_email** | **String**| prevent an email with login credentials from being sent to the new account. must be set to &#39;true&#39; | [optional] 
 
 ### Return type
 
@@ -139,8 +131,60 @@ Name | Type | Description  | Notes
 
 
 
+# **get_client_statistics**
+> get_client_statistics(opts)
+
+Get Client Statistics
+
+Gets general statics for a Client
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::AccountsApi.new
+
+opts = { 
+  client_id: "client_id_example" # String | Client ID of the account to retrieve. Defaults to yourself.
+}
+
+begin
+  #Get Client Statistics
+  api_instance.get_client_statistics(opts)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling AccountsApi->get_client_statistics: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **client_id** | **String**| Client ID of the account to retrieve. Defaults to yourself. | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
 # **subscription_purchase_allowed**
-> subscription_purchase_allowed(opts)
+> subscription_purchase_allowed
 
 Check if subscription purchase allowed.
 
@@ -153,27 +197,16 @@ require 'bombbomb'
 
 api_instance = BombBomb::AccountsApi.new
 
-opts = { 
-  email: "email_example", # String | Your login email address
-  pw: "pw_example", # String | Your password
-  api_key: "api_key_example" # String | Your Api Key
-}
-
 begin
   #Check if subscription purchase allowed.
-  api_instance.subscription_purchase_allowed(opts)
+  api_instance.subscription_purchase_allowed
 rescue BombBomb::ApiError => e
   puts "Exception when calling AccountsApi->subscription_purchase_allowed: #{e}"
 end
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **email** | **String**| Your login email address | [optional] 
- **pw** | **String**| Your password | [optional] 
- **api_key** | **String**| Your Api Key | [optional] 
+This endpoint does not need any parameter.
 
 ### Return type
 

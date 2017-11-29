@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**get_video_recorder**](VideosApi.md#get_video_recorder) | **GET** /videos/live/getRecorder | Get Live Video Recorder HTML
 [**mark_live_recording_complete**](VideosApi.md#mark_live_recording_complete) | **POST** /videos/live/markComplete | Completes a live recording
 [**sign_upload**](VideosApi.md#sign_upload) | **POST** /video/signedUpload | Generate Signed Url
+[**update_video_thumbnail_v2**](VideosApi.md#update_video_thumbnail_v2) | **PUT** /videos/thumbnail | Upload thumbnail
 
 
 # **get_video_encoding_status**
@@ -222,6 +223,64 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
+# **update_video_thumbnail_v2**
+> update_video_thumbnail_v2(video_id, thumbnail, opts)
+
+Upload thumbnail
+
+Upload a new video thumbnail
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::VideosApi.new
+
+video_id = "video_id_example" # String | The id of the video
+
+thumbnail = "thumbnail_example" # String | The thumbnail being uploaded
+
+opts = { 
+  custom: true # BOOLEAN | The default email to use.
+}
+
+begin
+  #Upload thumbnail
+  api_instance.update_video_thumbnail_v2(video_id, thumbnail, opts)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling VideosApi->update_video_thumbnail_v2: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **video_id** | **String**| The id of the video | 
+ **thumbnail** | **String**| The thumbnail being uploaded | 
+ **custom** | **BOOLEAN**| The default email to use. | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
 

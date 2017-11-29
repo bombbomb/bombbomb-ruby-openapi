@@ -10,11 +10,16 @@ Method | HTTP request | Description
 [**delete_subteam**](TeamsApi.md#delete_subteam) | **DELETE** /team/{teamId}/subteam | Delete Subteam
 [**get_all_client_group_associations**](TeamsApi.md#get_all_client_group_associations) | **GET** /team/associations/ | Lists team associations
 [**get_client_group_assets**](TeamsApi.md#get_client_group_assets) | **GET** /team/assets/ | Lists team assets
+[**get_client_group_statistics**](TeamsApi.md#get_client_group_statistics) | **GET** /team/{teamId}/stats | Get Team statistics
 [**get_jericho_sends**](TeamsApi.md#get_jericho_sends) | **GET** /team/{teamId}/jericho | List Jericho Sends
 [**get_jericho_stats**](TeamsApi.md#get_jericho_stats) | **GET** /team/{teamId}/jericho/{jerichoId}/performance | Gets Jericho performance statistics
+[**get_paged_client_group_members**](TeamsApi.md#get_paged_client_group_members) | **GET** /team/{teamId}/members | List Team Members
 [**get_subteams**](TeamsApi.md#get_subteams) | **GET** /team/{teamId}/subteam | List Subteams
+[**get_team_prompt_aggregate_stats**](TeamsApi.md#get_team_prompt_aggregate_stats) | **GET** /team/{clientGroupId}/campaign/stats | Get aggregate stats for campaigns
+[**get_team_prompt_campaigns**](TeamsApi.md#get_team_prompt_campaigns) | **GET** /team/{clientGroupId}/campaign | Get campaigns for team
 [**queue_jericho_send**](TeamsApi.md#queue_jericho_send) | **POST** /team/{teamId}/jericho | Creates a Jericho send.
 [**remove_member_from_team**](TeamsApi.md#remove_member_from_team) | **DELETE** /team/{teamId}/member/{userId} | Remove Member from Team
+[**resend_team_member_invitation**](TeamsApi.md#resend_team_member_invitation) | **POST** /team/{teamId}/{memberUserId}/rewelcome | Resend invite
 [**update_jericho_prompt_send**](TeamsApi.md#update_jericho_prompt_send) | **PUT** /team/{teamId}/jericho/{jerichoId} | Updates the Jericho Prompt Settings
 [**update_team**](TeamsApi.md#update_team) | **POST** /team/{teamId} | Update a team
 [**update_team_member**](TeamsApi.md#update_team_member) | **PUT** /team/{teamId}/member | Update Member of Team
@@ -356,6 +361,61 @@ Name | Type | Description  | Notes
 
 
 
+# **get_client_group_statistics**
+> get_client_group_statistics(team_id, opts)
+
+Get Team statistics
+
+Get top level statistic data for a Team
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::TeamsApi.new
+
+team_id = "team_id_example" # String | The team id
+
+opts = { 
+  member_status: "member_status_example" # String | The status of members to query for
+}
+
+begin
+  #Get Team statistics
+  api_instance.get_client_group_statistics(team_id, opts)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling TeamsApi->get_client_group_statistics: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **team_id** | **String**| The team id | 
+ **member_status** | **String**| The status of members to query for | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
 # **get_jericho_sends**
 > Array&lt;JerichoConfiguration&gt; get_jericho_sends(team_id)
 
@@ -463,6 +523,73 @@ Name | Type | Description  | Notes
 
 
 
+# **get_paged_client_group_members**
+> get_paged_client_group_members(team_id, page_size, page, opts)
+
+List Team Members
+
+Get a paginated listing of Team members
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::TeamsApi.new
+
+team_id = "team_id_example" # String | The team id
+
+page_size = "page_size_example" # String | Amount of records to return in a page.
+
+page = "page_example" # String | The page to return.
+
+opts = { 
+  status: "status_example", # String | The status type to filter by.
+  search: "search_example", # String | Filter results with names that match the search term.
+  order_by: "order_by_example", # String | Key to order results by
+  order_direction: "order_direction_example" # String | ASC or DESC
+}
+
+begin
+  #List Team Members
+  api_instance.get_paged_client_group_members(team_id, page_size, page, opts)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling TeamsApi->get_paged_client_group_members: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **team_id** | **String**| The team id | 
+ **page_size** | **String**| Amount of records to return in a page. | 
+ **page** | **String**| The page to return. | 
+ **status** | **String**| The status type to filter by. | [optional] 
+ **search** | **String**| Filter results with names that match the search term. | [optional] 
+ **order_by** | **String**| Key to order results by | [optional] 
+ **order_direction** | **String**| ASC or DESC | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
 # **get_subteams**
 > Array&lt;TeamPublicRepresentation&gt; get_subteams(team_id)
 
@@ -503,6 +630,116 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Array&lt;TeamPublicRepresentation&gt;**](TeamPublicRepresentation.md)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **get_team_prompt_aggregate_stats**
+> get_team_prompt_aggregate_stats(client_group_id)
+
+Get aggregate stats for campaigns
+
+Get all the campaigns aggregate stats
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::TeamsApi.new
+
+client_group_id = "client_group_id_example" # String | ID of the client group association
+
+
+begin
+  #Get aggregate stats for campaigns
+  api_instance.get_team_prompt_aggregate_stats(client_group_id)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling TeamsApi->get_team_prompt_aggregate_stats: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **client_group_id** | **String**| ID of the client group association | 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **get_team_prompt_campaigns**
+> get_team_prompt_campaigns(client_group_id, opts)
+
+Get campaigns for team
+
+Get campaigns for the team and their stats
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::TeamsApi.new
+
+client_group_id = "client_group_id_example" # String | ID of the client group association
+
+opts = { 
+  search_term: "search_term_example", # String | The value to search for in prompt subject
+  order_by: "order_by_example", # String | How to sort the column
+  asc: "asc_example" # String | Ascending or not
+}
+
+begin
+  #Get campaigns for team
+  api_instance.get_team_prompt_campaigns(client_group_id, opts)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling TeamsApi->get_team_prompt_campaigns: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **client_group_id** | **String**| ID of the client group association | 
+ **search_term** | **String**| The value to search for in prompt subject | [optional] 
+ **order_by** | **String**| How to sort the column | [optional] 
+ **asc** | **String**| Ascending or not | [optional] 
+
+### Return type
+
+nil (empty response body)
 
 ### Authorization
 
@@ -625,6 +862,61 @@ Name | Type | Description  | Notes
 
 
 
+# **resend_team_member_invitation**
+> TeamPublicRepresentation resend_team_member_invitation(team_id, member_user_id)
+
+Resend invite
+
+Resend invitation to a member of a team
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::TeamsApi.new
+
+team_id = "team_id_example" # String | The team id
+
+member_user_id = "member_user_id_example" # String | The user id of the member being resent an invitation.
+
+
+begin
+  #Resend invite
+  result = api_instance.resend_team_member_invitation(team_id, member_user_id)
+  p result
+rescue BombBomb::ApiError => e
+  puts "Exception when calling TeamsApi->resend_team_member_invitation: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **team_id** | **String**| The team id | 
+ **member_user_id** | **String**| The user id of the member being resent an invitation. | 
+
+### Return type
+
+[**TeamPublicRepresentation**](TeamPublicRepresentation.md)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
 # **update_jericho_prompt_send**
 > update_jericho_prompt_send(team_id, jericho_id)
 
@@ -701,7 +993,8 @@ api_instance = BombBomb::TeamsApi.new
 team_id = "team_id_example" # String | The team id
 
 opts = { 
-  name: "name_example" # String | The name of the team
+  name: "name_example", # String | The name of the team
+  state: "state_example" # String | The status of the login permissions
 }
 
 begin
@@ -719,6 +1012,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **team_id** | **String**| The team id | 
  **name** | **String**| The name of the team | [optional] 
+ **state** | **String**| The status of the login permissions | [optional] 
 
 ### Return type
 

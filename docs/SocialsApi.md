@@ -4,17 +4,64 @@ All URIs are relative to *https://api.bombbomb.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**get_facebook_pages**](SocialsApi.md#get_facebook_pages) | **GET** /socials/facebook/pages | Gets facebook pages
 [**get_social_article_properties**](SocialsApi.md#get_social_article_properties) | **GET** /socials/properties | Gets the social email properties
-[**get_social_auto_shares**](SocialsApi.md#get_social_auto_shares) | **GET** /socials/shares | Gets the auto shares from the client group assoc id
-[**get_social_permissions**](SocialsApi.md#get_social_permissions) | **GET** /socials/permissions | Get permissions for social integration
-[**get_social_status**](SocialsApi.md#get_social_status) | **GET** /socials/states | Gets the social state
-[**update_social_auto_shares**](SocialsApi.md#update_social_auto_shares) | **PUT** /socials/shares | Gets the auto shares from the client group assoc id
-[**update_social_message**](SocialsApi.md#update_social_message) | **PUT** /socials/message | Sets the users social message to what they typed in
-[**update_social_status**](SocialsApi.md#update_social_status) | **PUT** /socials/state | Updates the social state for the object
+[**get_social_authorizations**](SocialsApi.md#get_social_authorizations) | **GET** /socials/authorizations | Get authorizations for all social integration
+[**get_social_profile_properties**](SocialsApi.md#get_social_profile_properties) | **GET** /socials/profile | Gets the profile properties
+[**get_social_stats**](SocialsApi.md#get_social_stats) | **GET** /socials/{promptId}/stats | Get social stats for a prompt
+[**post_social_content**](SocialsApi.md#post_social_content) | **POST** /socials/content | Creates social content
+[**update_client_group_send_mechanism**](SocialsApi.md#update_client_group_send_mechanism) | **PUT** /socials/client/sendMechanism | Gets the auto shares from the client group assoc id
+[**update_facebook_pages**](SocialsApi.md#update_facebook_pages) | **PUT** /socials/facebook/pages | Updates facebook page Ids
+[**update_social_content**](SocialsApi.md#update_social_content) | **PUT** /socials/content | Updates social content
+
+
+# **get_facebook_pages**
+> get_facebook_pages
+
+Gets facebook pages
+
+Gets facebook pages by client id
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::SocialsApi.new
+
+begin
+  #Gets facebook pages
+  api_instance.get_facebook_pages
+rescue BombBomb::ApiError => e
+  puts "Exception when calling SocialsApi->get_facebook_pages: #{e}"
+end
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
 
 
 # **get_social_article_properties**
-> get_social_article_properties(jericho_id, email_id, originator_id)
+> get_social_article_properties(email_id)
 
 Gets the social email properties
 
@@ -32,16 +79,12 @@ end
 
 api_instance = BombBomb::SocialsApi.new
 
-jericho_id = "jericho_id_example" # String | associated jericho Id
-
 email_id = "email_id_example" # String | This is the email Id for the email url
-
-originator_id = "originator_id_example" # String | This is the originator Id
 
 
 begin
   #Gets the social email properties
-  api_instance.get_social_article_properties(jericho_id, email_id, originator_id)
+  api_instance.get_social_article_properties(email_id)
 rescue BombBomb::ApiError => e
   puts "Exception when calling SocialsApi->get_social_article_properties: #{e}"
 end
@@ -51,9 +94,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **jericho_id** | **String**| associated jericho Id | 
  **email_id** | **String**| This is the email Id for the email url | 
- **originator_id** | **String**| This is the originator Id | 
 
 ### Return type
 
@@ -70,8 +111,213 @@ nil (empty response body)
 
 
 
-# **get_social_auto_shares**
-> get_social_auto_shares(client_group_id)
+# **get_social_authorizations**
+> get_social_authorizations(opts)
+
+Get authorizations for all social integration
+
+Get authorizations and autoshares for all social integration and has redirect for user to login
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::SocialsApi.new
+
+opts = { 
+  client_group_id: "client_group_id_example" # String | ID of the client group association
+}
+
+begin
+  #Get authorizations for all social integration
+  api_instance.get_social_authorizations(opts)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling SocialsApi->get_social_authorizations: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **client_group_id** | **String**| ID of the client group association | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **get_social_profile_properties**
+> get_social_profile_properties(social_type)
+
+Gets the profile properties
+
+Gets the social profile properties
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::SocialsApi.new
+
+social_type = "social_type_example" # String | The social type
+
+
+begin
+  #Gets the profile properties
+  api_instance.get_social_profile_properties(social_type)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling SocialsApi->get_social_profile_properties: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **social_type** | **String**| The social type | 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **get_social_stats**
+> get_social_stats(prompt_id)
+
+Get social stats for a prompt
+
+Get social stats for a prompt by id
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::SocialsApi.new
+
+prompt_id = "prompt_id_example" # String | ID of the prompt
+
+
+begin
+  #Get social stats for a prompt
+  api_instance.get_social_stats(prompt_id)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling SocialsApi->get_social_stats: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_id** | **String**| ID of the prompt | 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **post_social_content**
+> post_social_content(email_id)
+
+Creates social content
+
+Creates social content for an email
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::SocialsApi.new
+
+email_id = "email_id_example" # String | The email's id
+
+
+begin
+  #Creates social content
+  api_instance.post_social_content(email_id)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling SocialsApi->post_social_content: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **email_id** | **String**| The email&#39;s id | 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **update_client_group_send_mechanism**
+> update_client_group_send_mechanism(send_mechanism, client_group_id, opts)
 
 Gets the auto shares from the client group assoc id
 
@@ -88,15 +334,20 @@ BombBomb.configure do |config|
 end
 
 api_instance = BombBomb::SocialsApi.new
+
+send_mechanism = "send_mechanism_example" # String | The send mechanism for the prompt
 
 client_group_id = "client_group_id_example" # String | ID of the client group association
 
+opts = { 
+  enabled: "enabled_example" # String | Is the send mechanism enabled?
+}
 
 begin
   #Gets the auto shares from the client group assoc id
-  api_instance.get_social_auto_shares(client_group_id)
+  api_instance.update_client_group_send_mechanism(send_mechanism, client_group_id, opts)
 rescue BombBomb::ApiError => e
-  puts "Exception when calling SocialsApi->get_social_auto_shares: #{e}"
+  puts "Exception when calling SocialsApi->update_client_group_send_mechanism: #{e}"
 end
 ```
 
@@ -104,7 +355,9 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **send_mechanism** | **String**| The send mechanism for the prompt | 
  **client_group_id** | **String**| ID of the client group association | 
+ **enabled** | **String**| Is the send mechanism enabled? | [optional] 
 
 ### Return type
 
@@ -121,12 +374,12 @@ nil (empty response body)
 
 
 
-# **get_social_permissions**
-> get_social_permissions(social_type)
+# **update_facebook_pages**
+> update_facebook_pages(page_ids)
 
-Get permissions for social integration
+Updates facebook page Ids
 
-Get permissions for social integration and has redirect for user to login
+Updates facebook page Ids to be sent to for prompts
 
 ### Example
 ```ruby
@@ -140,14 +393,14 @@ end
 
 api_instance = BombBomb::SocialsApi.new
 
-social_type = "social_type_example" # String | Type of social integration
+page_ids = "page_ids_example" # String | Page Ids for the prompt
 
 
 begin
-  #Get permissions for social integration
-  api_instance.get_social_permissions(social_type)
+  #Updates facebook page Ids
+  api_instance.update_facebook_pages(page_ids)
 rescue BombBomb::ApiError => e
-  puts "Exception when calling SocialsApi->get_social_permissions: #{e}"
+  puts "Exception when calling SocialsApi->update_facebook_pages: #{e}"
 end
 ```
 
@@ -155,7 +408,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **social_type** | **String**| Type of social integration | 
+ **page_ids** | **String**| Page Ids for the prompt | 
 
 ### Return type
 
@@ -172,63 +425,12 @@ nil (empty response body)
 
 
 
-# **get_social_status**
-> get_social_status(originator_id)
+# **update_social_content**
+> update_social_content(social_id, opts)
 
-Gets the social state
+Updates social content
 
-Gets the social state
-
-### Example
-```ruby
-# load the gem
-require 'bombbomb'
-# setup authorization
-BombBomb.configure do |config|
-  # Configure OAuth2 access token for authorization: BBOAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
-
-api_instance = BombBomb::SocialsApi.new
-
-originator_id = "originator_id_example" # String | associated originatorId
-
-
-begin
-  #Gets the social state
-  api_instance.get_social_status(originator_id)
-rescue BombBomb::ApiError => e
-  puts "Exception when calling SocialsApi->get_social_status: #{e}"
-end
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **originator_id** | **String**| associated originatorId | 
-
-### Return type
-
-nil (empty response body)
-
-### Authorization
-
-[BBOAuth2](../README.md#BBOAuth2)
-
-### HTTP request headers
-
- - **Content-Type**: application/x-www-form-urlencoded
- - **Accept**: application/json
-
-
-
-# **update_social_auto_shares**
-> update_social_auto_shares(auto_share, client_group_id)
-
-Gets the auto shares from the client group assoc id
-
-Gets the auto shares from the client group assoc id
+Updates social content for an email
 
 ### Example
 ```ruby
@@ -242,16 +444,20 @@ end
 
 api_instance = BombBomb::SocialsApi.new
 
-auto_share = "auto_share_example" # String | The social share that will auto share to
+social_id = "social_id_example" # String | The social id
 
-client_group_id = "client_group_id_example" # String | ID of the client group association
-
+opts = { 
+  title: "title_example", # String | The title for the article
+  description: "description_example", # String | The article description
+  picture_url: "picture_url_example", # String | The article picture url
+  suggested_message: "suggested_message_example" # String | The suggested message to use
+}
 
 begin
-  #Gets the auto shares from the client group assoc id
-  api_instance.update_social_auto_shares(auto_share, client_group_id)
+  #Updates social content
+  api_instance.update_social_content(social_id, opts)
 rescue BombBomb::ApiError => e
-  puts "Exception when calling SocialsApi->update_social_auto_shares: #{e}"
+  puts "Exception when calling SocialsApi->update_social_content: #{e}"
 end
 ```
 
@@ -259,116 +465,11 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **auto_share** | **String**| The social share that will auto share to | 
- **client_group_id** | **String**| ID of the client group association | 
-
-### Return type
-
-nil (empty response body)
-
-### Authorization
-
-[BBOAuth2](../README.md#BBOAuth2)
-
-### HTTP request headers
-
- - **Content-Type**: application/x-www-form-urlencoded
- - **Accept**: application/json
-
-
-
-# **update_social_message**
-> update_social_message(message, originator_id)
-
-Sets the users social message to what they typed in
-
-Sets the users social message to what they typed in
-
-### Example
-```ruby
-# load the gem
-require 'bombbomb'
-# setup authorization
-BombBomb.configure do |config|
-  # Configure OAuth2 access token for authorization: BBOAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
-
-api_instance = BombBomb::SocialsApi.new
-
-message = "message_example" # String | The social message the user typed in
-
-originator_id = "originator_id_example" # String | The parent id tied to the social share
-
-
-begin
-  #Sets the users social message to what they typed in
-  api_instance.update_social_message(message, originator_id)
-rescue BombBomb::ApiError => e
-  puts "Exception when calling SocialsApi->update_social_message: #{e}"
-end
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **message** | **String**| The social message the user typed in | 
- **originator_id** | **String**| The parent id tied to the social share | 
-
-### Return type
-
-nil (empty response body)
-
-### Authorization
-
-[BBOAuth2](../README.md#BBOAuth2)
-
-### HTTP request headers
-
- - **Content-Type**: application/x-www-form-urlencoded
- - **Accept**: application/json
-
-
-
-# **update_social_status**
-> update_social_status(state, originator_id)
-
-Updates the social state for the object
-
-Updates the social state for the object
-
-### Example
-```ruby
-# load the gem
-require 'bombbomb'
-# setup authorization
-BombBomb.configure do |config|
-  # Configure OAuth2 access token for authorization: BBOAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
-
-api_instance = BombBomb::SocialsApi.new
-
-state = "state_example" # String | The state to set to
-
-originator_id = "originator_id_example" # String | The parent id tied to the social share
-
-
-begin
-  #Updates the social state for the object
-  api_instance.update_social_status(state, originator_id)
-rescue BombBomb::ApiError => e
-  puts "Exception when calling SocialsApi->update_social_status: #{e}"
-end
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **state** | **String**| The state to set to | 
- **originator_id** | **String**| The parent id tied to the social share | 
+ **social_id** | **String**| The social id | 
+ **title** | **String**| The title for the article | [optional] 
+ **description** | **String**| The article description | [optional] 
+ **picture_url** | **String**| The article picture url | [optional] 
+ **suggested_message** | **String**| The suggested message to use | [optional] 
 
 ### Return type
 
