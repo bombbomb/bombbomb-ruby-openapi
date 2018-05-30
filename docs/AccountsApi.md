@@ -7,7 +7,10 @@ Method | HTTP request | Description
 [**account_details**](AccountsApi.md#account_details) | **GET** /accounts | Get account details.
 [**create_account**](AccountsApi.md#create_account) | **POST** /accounts | Create Account
 [**get_client_statistics**](AccountsApi.md#get_client_statistics) | **GET** /accounts/stats | Get Client Statistics
+[**get_user_country**](AccountsApi.md#get_user_country) | **GET** /accounts/{clientId}/country | Gets user country
+[**reset_api_key**](AccountsApi.md#reset_api_key) | **PUT** /accounts/apikey | Reset API key
 [**subscription_purchase_allowed**](AccountsApi.md#subscription_purchase_allowed) | **GET** /accounts/purchaseable | Check if subscription purchase allowed.
+[**update_profile_data**](AccountsApi.md#update_profile_data) | **POST** /account/profile/ | Add profile information.
 
 
 # **account_details**
@@ -21,6 +24,11 @@ Get the details of the user's account.
 ```ruby
 # load the gem
 require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
 
 api_instance = BombBomb::AccountsApi.new
 
@@ -41,7 +49,7 @@ nil (empty response body)
 
 ### Authorization
 
-No authorization required
+[BBOAuth2](../README.md#BBOAuth2)
 
 ### HTTP request headers
 
@@ -87,7 +95,7 @@ opts = {
   address: "address_example", # String | Street Address of the user.
   city: "city_example", # String | City of the user.
   postal_code: "postal_code_example", # String | Postal/Zip code of the user.
-  prevent_welcome_email: "prevent_welcome_email_example" # String | prevent an email with login credentials from being sent to the new account. must be set to 'true'
+  prevent_welcome_email: true # BOOLEAN | prevent an email with login credentials from being sent to the new account. must be set to 'true'
 }
 
 begin
@@ -114,7 +122,7 @@ Name | Type | Description  | Notes
  **address** | **String**| Street Address of the user. | [optional] 
  **city** | **String**| City of the user. | [optional] 
  **postal_code** | **String**| Postal/Zip code of the user. | [optional] 
- **prevent_welcome_email** | **String**| prevent an email with login credentials from being sent to the new account. must be set to &#39;true&#39; | [optional] 
+ **prevent_welcome_email** | **BOOLEAN**| prevent an email with login credentials from being sent to the new account. must be set to &#39;true&#39; | [optional] 
 
 ### Return type
 
@@ -151,7 +159,9 @@ end
 api_instance = BombBomb::AccountsApi.new
 
 opts = { 
-  client_id: "client_id_example" # String | Client ID of the account to retrieve. Defaults to yourself.
+  client_id: "client_id_example", # String | Client ID of the account to retrieve. Defaults to yourself.
+  refresh: true, # BOOLEAN | Boolean for whether data returned should be from cache or not.
+  statistic_values: "statistic_values_example" # String | Array of data that should be returned, used exclusively for cacheless data
 }
 
 begin
@@ -167,6 +177,98 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **client_id** | **String**| Client ID of the account to retrieve. Defaults to yourself. | [optional] 
+ **refresh** | **BOOLEAN**| Boolean for whether data returned should be from cache or not. | [optional] 
+ **statistic_values** | **String**| Array of data that should be returned, used exclusively for cacheless data | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **get_user_country**
+> get_user_country
+
+Gets user country
+
+Gets the users country
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::AccountsApi.new
+
+begin
+  #Gets user country
+  api_instance.get_user_country
+rescue BombBomb::ApiError => e
+  puts "Exception when calling AccountsApi->get_user_country: #{e}"
+end
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **reset_api_key**
+> reset_api_key
+
+Reset API key
+
+Resets the current user's API key and returns the new key
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::AccountsApi.new
+
+begin
+  #Reset API key
+  api_instance.reset_api_key
+rescue BombBomb::ApiError => e
+  puts "Exception when calling AccountsApi->reset_api_key: #{e}"
+end
+```
+
+### Parameters
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -194,6 +296,11 @@ Check whether the user can purchase a subscription.
 ```ruby
 # load the gem
 require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
 
 api_instance = BombBomb::AccountsApi.new
 
@@ -214,7 +321,59 @@ nil (empty response body)
 
 ### Authorization
 
-No authorization required
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **update_profile_data**
+> update_profile_data(opts)
+
+Add profile information.
+
+Add profile information to this users account
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::AccountsApi.new
+
+opts = { 
+  profile_data: "profile_data_example" # String | Profile field information for the account
+}
+
+begin
+  #Add profile information.
+  api_instance.update_profile_data(opts)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling AccountsApi->update_profile_data: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **profile_data** | **String**| Profile field information for the account | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
 
 ### HTTP request headers
 

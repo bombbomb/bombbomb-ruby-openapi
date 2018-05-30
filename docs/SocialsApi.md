@@ -10,7 +10,10 @@ Method | HTTP request | Description
 [**get_social_profile_properties**](SocialsApi.md#get_social_profile_properties) | **GET** /socials/profile | Gets the profile properties
 [**get_social_stats**](SocialsApi.md#get_social_stats) | **GET** /socials/{promptId}/stats | Get social stats for a prompt
 [**post_social_content**](SocialsApi.md#post_social_content) | **POST** /socials/content | Creates social content
+[**retry_social_send**](SocialsApi.md#retry_social_send) | **POST** /socials/send/retry | Sends social content
+[**send_social**](SocialsApi.md#send_social) | **POST** /socials/send | Sends social content
 [**update_client_group_send_mechanism**](SocialsApi.md#update_client_group_send_mechanism) | **PUT** /socials/client/sendMechanism | Gets the auto shares from the client group assoc id
+[**update_client_groups_send_mechanism**](SocialsApi.md#update_client_groups_send_mechanism) | **PUT** /socials/client/sendMechanisms | Toggles the prompt campaigns in a users account
 [**update_facebook_pages**](SocialsApi.md#update_facebook_pages) | **PUT** /socials/facebook/pages | Updates facebook page Ids
 [**update_social_content**](SocialsApi.md#update_social_content) | **PUT** /socials/content | Updates social content
 
@@ -61,7 +64,7 @@ nil (empty response body)
 
 
 # **get_social_article_properties**
-> get_social_article_properties(email_id)
+> get_social_article_properties(email_id, social_content_id)
 
 Gets the social email properties
 
@@ -81,10 +84,12 @@ api_instance = BombBomb::SocialsApi.new
 
 email_id = "email_id_example" # String | This is the email Id for the email url
 
+social_content_id = "social_content_id_example" # String | This is the social content Id
+
 
 begin
   #Gets the social email properties
-  api_instance.get_social_article_properties(email_id)
+  api_instance.get_social_article_properties(email_id, social_content_id)
 rescue BombBomb::ApiError => e
   puts "Exception when calling SocialsApi->get_social_article_properties: #{e}"
 end
@@ -95,6 +100,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **email_id** | **String**| This is the email Id for the email url | 
+ **social_content_id** | **String**| This is the social content Id | 
 
 ### Return type
 
@@ -316,6 +322,111 @@ nil (empty response body)
 
 
 
+# **retry_social_send**
+> retry_social_send(prompt_id)
+
+Sends social content
+
+Sends social content that failed for a user via their associated prompt
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::SocialsApi.new
+
+prompt_id = "prompt_id_example" # String | The prompt id
+
+
+begin
+  #Sends social content
+  api_instance.retry_social_send(prompt_id)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling SocialsApi->retry_social_send: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_id** | **String**| The prompt id | 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **send_social**
+> send_social(prompt_id, social_type)
+
+Sends social content
+
+Sends social content for a user via their associated prompt
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::SocialsApi.new
+
+prompt_id = "prompt_id_example" # String | The prompt id
+
+social_type = "social_type_example" # String | The destination for social content
+
+
+begin
+  #Sends social content
+  api_instance.send_social(prompt_id, social_type)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling SocialsApi->send_social: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_id** | **String**| The prompt id | 
+ **social_type** | **String**| The destination for social content | 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
 # **update_client_group_send_mechanism**
 > update_client_group_send_mechanism(send_mechanism, client_group_id, opts)
 
@@ -358,6 +469,60 @@ Name | Type | Description  | Notes
  **send_mechanism** | **String**| The send mechanism for the prompt | 
  **client_group_id** | **String**| ID of the client group association | 
  **enabled** | **String**| Is the send mechanism enabled? | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **update_client_groups_send_mechanism**
+> update_client_groups_send_mechanism(send_mechanism, enabled)
+
+Toggles the prompt campaigns in a users account
+
+Toggles the prompt campaigns in a users account for a social integrations on or off
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::SocialsApi.new
+
+send_mechanism = "send_mechanism_example" # String | The send mechanism for the prompt
+
+enabled = "enabled_example" # String | Is the send mechanism enabled?
+
+
+begin
+  #Toggles the prompt campaigns in a users account
+  api_instance.update_client_groups_send_mechanism(send_mechanism, enabled)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling SocialsApi->update_client_groups_send_mechanism: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **send_mechanism** | **String**| The send mechanism for the prompt | 
+ **enabled** | **String**| Is the send mechanism enabled? | 
 
 ### Return type
 

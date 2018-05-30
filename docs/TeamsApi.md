@@ -5,6 +5,8 @@ All URIs are relative to *https://api.bombbomb.com/v2*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_team_member**](TeamsApi.md#add_team_member) | **POST** /team/{teamId}/member | Add Member to Team
+[**add_users**](TeamsApi.md#add_users) | **POST** /team/{teamId}/members | Add users to group.
+[**add_users_from_csv**](TeamsApi.md#add_users_from_csv) | **POST** /team/{teamId}/members/csv | Add members to group from CSV
 [**cancel_jericho_send**](TeamsApi.md#cancel_jericho_send) | **DELETE** /team/{teamId}/jericho/{jerichoId} | Cancel a Jericho Send
 [**create_subteam**](TeamsApi.md#create_subteam) | **POST** /team/{teamId}/subteam | Add a Subteam
 [**delete_subteam**](TeamsApi.md#delete_subteam) | **DELETE** /team/{teamId}/subteam | Delete Subteam
@@ -17,6 +19,7 @@ Method | HTTP request | Description
 [**get_subteams**](TeamsApi.md#get_subteams) | **GET** /team/{teamId}/subteam | List Subteams
 [**get_team_prompt_aggregate_stats**](TeamsApi.md#get_team_prompt_aggregate_stats) | **GET** /team/{clientGroupId}/campaign/stats | Get aggregate stats for campaigns
 [**get_team_prompt_campaigns**](TeamsApi.md#get_team_prompt_campaigns) | **GET** /team/{clientGroupId}/campaign | Get campaigns for team
+[**invite_to_social_prompt_team**](TeamsApi.md#invite_to_social_prompt_team) | **POST** /teams/prompt/invite | Invite a list to join the admin&#39;s social prompt team
 [**queue_jericho_send**](TeamsApi.md#queue_jericho_send) | **POST** /team/{teamId}/jericho | Creates a Jericho send.
 [**remove_member_from_team**](TeamsApi.md#remove_member_from_team) | **DELETE** /team/{teamId}/member/{userId} | Remove Member from Team
 [**resend_team_member_invitation**](TeamsApi.md#resend_team_member_invitation) | **POST** /team/{teamId}/{memberUserId}/rewelcome | Resend invite
@@ -47,9 +50,10 @@ api_instance = BombBomb::TeamsApi.new
 team_id = "team_id_example" # String | The team id
 
 opts = { 
-  user_id: "user_id_example", # String | The user id of the member being added to the team.
+  admin: true, # BOOLEAN | Set if the user is an admin of this team.
+  subgroup_ids: "subgroup_ids_example", # String | Subgroup IDs to add user to
   user_email: "user_email_example", # String | The email of the member being added to the team.
-  admin: true # BOOLEAN | Set if the user is an admin of this team.
+  user_id: "user_id_example" # String | The user id of the member being added to the team.
 }
 
 begin
@@ -66,13 +70,137 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **team_id** | **String**| The team id | 
- **user_id** | **String**| The user id of the member being added to the team. | [optional] 
- **user_email** | **String**| The email of the member being added to the team. | [optional] 
  **admin** | **BOOLEAN**| Set if the user is an admin of this team. | [optional] 
+ **subgroup_ids** | **String**| Subgroup IDs to add user to | [optional] 
+ **user_email** | **String**| The email of the member being added to the team. | [optional] 
+ **user_id** | **String**| The user id of the member being added to the team. | [optional] 
 
 ### Return type
 
 **String**
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **add_users**
+> add_users(team_id, user_details, opts)
+
+Add users to group.
+
+Add a new or existing user to group.
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::TeamsApi.new
+
+team_id = "team_id_example" # String | The team id
+
+user_details = "user_details_example" # String | Array of emails or objects containing details needed to create user
+
+opts = { 
+  send_welcome_email: "send_welcome_email_example", # String | Whether to send welcome email to new users
+  subgroup_ids: "subgroup_ids_example" # String | Subgroup IDs to add user to
+}
+
+begin
+  #Add users to group.
+  api_instance.add_users(team_id, user_details, opts)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling TeamsApi->add_users: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **team_id** | **String**| The team id | 
+ **user_details** | **String**| Array of emails or objects containing details needed to create user | 
+ **send_welcome_email** | **String**| Whether to send welcome email to new users | [optional] 
+ **subgroup_ids** | **String**| Subgroup IDs to add user to | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **add_users_from_csv**
+> add_users_from_csv(team_id, csv_import_id, map, opts)
+
+Add members to group from CSV
+
+Imports members to a group from a given CSV ID.
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::TeamsApi.new
+
+team_id = "team_id_example" # String | The team id
+
+csv_import_id = "csv_import_id_example" # String | ID of the CSV to import
+
+map = "map_example" # String | Object to use when mapping import to AccountCreateDetails. Key is property name on details, value is CSV column number.
+
+opts = { 
+  send_welcome_email: "send_welcome_email_example", # String | Whether to send welcome email to new users
+  subgroup_ids: "subgroup_ids_example" # String | Subgroup IDs to add user to
+}
+
+begin
+  #Add members to group from CSV
+  api_instance.add_users_from_csv(team_id, csv_import_id, map, opts)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling TeamsApi->add_users_from_csv: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **team_id** | **String**| The team id | 
+ **csv_import_id** | **String**| ID of the CSV to import | 
+ **map** | **String**| Object to use when mapping import to AccountCreateDetails. Key is property name on details, value is CSV column number. | 
+ **send_welcome_email** | **String**| Whether to send welcome email to new users | [optional] 
+ **subgroup_ids** | **String**| Subgroup IDs to add user to | [optional] 
+
+### Return type
+
+nil (empty response body)
 
 ### Authorization
 
@@ -716,8 +844,7 @@ client_group_id = "client_group_id_example" # String | ID of the client group as
 
 opts = { 
   search_term: "search_term_example", # String | The value to search for in prompt subject
-  order_by: "order_by_example", # String | How to sort the column
-  asc: "asc_example" # String | Ascending or not
+  current_page: "current_page_example" # String | The current page
 }
 
 begin
@@ -734,8 +861,61 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **client_group_id** | **String**| ID of the client group association | 
  **search_term** | **String**| The value to search for in prompt subject | [optional] 
- **order_by** | **String**| How to sort the column | [optional] 
- **asc** | **String**| Ascending or not | [optional] 
+ **current_page** | **String**| The current page | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **invite_to_social_prompt_team**
+> invite_to_social_prompt_team(team_id, list_id)
+
+Invite a list to join the admin's social prompt team
+
+Invite to Social Prompt Team
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::TeamsApi.new
+
+team_id = "team_id_example" # String | The team id
+
+list_id = "list_id_example" # String | List to invite to the social prompt team.
+
+
+begin
+  #Invite a list to join the admin's social prompt team
+  api_instance.invite_to_social_prompt_team(team_id, list_id)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling TeamsApi->invite_to_social_prompt_team: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **team_id** | **String**| The team id | 
+ **list_id** | **String**| List to invite to the social prompt team. | 
 
 ### Return type
 
@@ -994,7 +1174,8 @@ team_id = "team_id_example" # String | The team id
 
 opts = { 
   name: "name_example", # String | The name of the team
-  state: "state_example" # String | The status of the login permissions
+  state: "state_example", # String | The status of the login permissions
+  subteams_can_add_members: true # BOOLEAN | Updates subteam member adding setting on group
 }
 
 begin
@@ -1013,6 +1194,7 @@ Name | Type | Description  | Notes
  **team_id** | **String**| The team id | 
  **name** | **String**| The name of the team | [optional] 
  **state** | **String**| The status of the login permissions | [optional] 
+ **subteams_can_add_members** | **BOOLEAN**| Updates subteam member adding setting on group | [optional] 
 
 ### Return type
 
@@ -1030,7 +1212,7 @@ Name | Type | Description  | Notes
 
 
 # **update_team_member**
-> update_team_member(team_id, user_id, admin)
+> update_team_member(team_id, user_id, admin, opts)
 
 Update Member of Team
 
@@ -1054,10 +1236,13 @@ user_id = "user_id_example" # String | The user id of the member being added to 
 
 admin = true # BOOLEAN | Set if the user is an admin of this team.
 
+opts = { 
+  permission_suite_id: "permission_suite_id_example" # String | Set if the user is an admin of this team.
+}
 
 begin
   #Update Member of Team
-  api_instance.update_team_member(team_id, user_id, admin)
+  api_instance.update_team_member(team_id, user_id, admin, opts)
 rescue BombBomb::ApiError => e
   puts "Exception when calling TeamsApi->update_team_member: #{e}"
 end
@@ -1070,6 +1255,7 @@ Name | Type | Description  | Notes
  **team_id** | **String**| The team id | 
  **user_id** | **String**| The user id of the member being added to the team. | 
  **admin** | **BOOLEAN**| Set if the user is an admin of this team. | 
+ **permission_suite_id** | **String**| Set if the user is an admin of this team. | [optional] 
 
 ### Return type
 

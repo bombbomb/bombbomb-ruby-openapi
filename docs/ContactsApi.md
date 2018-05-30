@@ -285,11 +285,11 @@ nil (empty response body)
 
 
 # **delete_contacts**
-> delete_contacts(list_id)
+> delete_contacts(opts)
 
 Delete Contacts
 
-Delete contacts
+Delete all contacts within a list, or provide a comma separated list of contactIds to delete.
 
 ### Example
 ```ruby
@@ -303,12 +303,14 @@ end
 
 api_instance = BombBomb::ContactsApi.new
 
-list_id = "list_id_example" # String | The list of contacts to be deleted.
-
+opts = { 
+  list_id: "list_id_example", # String | The list of contacts to be deleted.
+  contact_ids: "contact_ids_example" # String | comma separated list of contact ids to delete
+}
 
 begin
   #Delete Contacts
-  api_instance.delete_contacts(list_id)
+  api_instance.delete_contacts(opts)
 rescue BombBomb::ApiError => e
   puts "Exception when calling ContactsApi->delete_contacts: #{e}"
 end
@@ -318,7 +320,8 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **list_id** | **String**| The list of contacts to be deleted. | 
+ **list_id** | **String**| The list of contacts to be deleted. | [optional] 
+ **contact_ids** | **String**| comma separated list of contact ids to delete | [optional] 
 
 ### Return type
 

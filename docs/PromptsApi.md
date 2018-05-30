@@ -6,15 +6,18 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_prompt_bot**](PromptsApi.md#create_prompt_bot) | **POST** /prompts/bots | Create a running Prompt Bot for a list
 [**create_video_email_prompt**](PromptsApi.md#create_video_email_prompt) | **POST** /prompt | Prompts user to send a video
+[**get_alternate_campaign_content**](PromptsApi.md#get_alternate_campaign_content) | **GET** /campaign/{campaignId}/content/alternate | List alternate campaign content
 [**get_pending_video_email_prompts**](PromptsApi.md#get_pending_video_email_prompts) | **GET** /prompt/pending | List pending prompts
 [**get_prompt_bots**](PromptsApi.md#get_prompt_bots) | **GET** /prompts/bots | List Prompt Bots
-[**get_prompt_campaigns**](PromptsApi.md#get_prompt_campaigns) | **GET** /prompts/campaigns | List Prompt Campaigns
+[**get_prompt_campaigns**](PromptsApi.md#get_prompt_campaigns) | **GET** /prompts/{userId}/campaigns | List Prompt Campaigns
 [**get_video_email_prompt**](PromptsApi.md#get_video_email_prompt) | **GET** /prompt/{id} | Gets a prompt
 [**get_video_email_prompts**](PromptsApi.md#get_video_email_prompts) | **GET** /prompt/ | List prompts
 [**respond_to_video_email_prompt**](PromptsApi.md#respond_to_video_email_prompt) | **POST** /prompt/{id}/response | Respond to a prompt
+[**sync_prompt_subscriptions**](PromptsApi.md#sync_prompt_subscriptions) | **POST** /prompts/campaigns/sync | Syncs Campaigns and One to Ones Subscriptions for User
 [**update_prompt**](PromptsApi.md#update_prompt) | **PUT** /prompts/{id} | Update Prompt
 [**update_prompt_bot**](PromptsApi.md#update_prompt_bot) | **PUT** /prompts/bots/{id} | Update Prompt Bot
 [**update_prompt_campaign**](PromptsApi.md#update_prompt_campaign) | **PUT** /prompts/campaigns/{id} | Update Prompt Campaign
+[**update_prompt_template**](PromptsApi.md#update_prompt_template) | **PUT** /prompts/{id}/content | Update Prompt Content
 
 
 # **create_prompt_bot**
@@ -143,6 +146,57 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
+# **get_alternate_campaign_content**
+> get_alternate_campaign_content(client_group_id)
+
+List alternate campaign content
+
+Returns a list of alternate campaign content by campaign id
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::PromptsApi.new
+
+client_group_id = "client_group_id_example" # String | Id for the campaign
+
+
+begin
+  #List alternate campaign content
+  api_instance.get_alternate_campaign_content(client_group_id)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling PromptsApi->get_alternate_campaign_content: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **client_group_id** | **String**| Id for the campaign | 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
 
@@ -440,6 +494,58 @@ No authorization required
 
 
 
+# **sync_prompt_subscriptions**
+> sync_prompt_subscriptions(opts)
+
+Syncs Campaigns and One to Ones Subscriptions for User
+
+Syncs Campaigns and One to Ones Subscriptions for User based on their profile information. The user must be a Prompt Subscriber.
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::PromptsApi.new
+
+opts = { 
+  migrate: true # BOOLEAN | After syncing, migrate away from old campaigns.
+}
+
+begin
+  #Syncs Campaigns and One to Ones Subscriptions for User
+  api_instance.sync_prompt_subscriptions(opts)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling PromptsApi->sync_prompt_subscriptions: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **migrate** | **BOOLEAN**| After syncing, migrate away from old campaigns. | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
 # **update_prompt**
 > update_prompt(id, opts)
 
@@ -467,7 +573,10 @@ opts = {
   twitter_message: "twitter_message_example", # String | The twitter message assigned to the prompt
   video_id: "video_id_example", # String | The id of the video.
   email_id: "email_id_example", # String | The id of the email.
-  subject: "subject_example" # String | The subject of the email
+  subject: "subject_example", # String | The subject of the email
+  reset_cache: "reset_cache_example", # String | The subject of the email
+  reset_email_content: "reset_email_content_example", # String | The subject of the email
+  status: "status_example" # String | The status of the prompt
 }
 
 begin
@@ -489,6 +598,9 @@ Name | Type | Description  | Notes
  **video_id** | **String**| The id of the video. | [optional] 
  **email_id** | **String**| The id of the email. | [optional] 
  **subject** | **String**| The subject of the email | [optional] 
+ **reset_cache** | **String**| The subject of the email | [optional] 
+ **reset_email_content** | **String**| The subject of the email | [optional] 
+ **status** | **String**| The status of the prompt | [optional] 
 
 ### Return type
 
@@ -630,6 +742,69 @@ Name | Type | Description  | Notes
  **personal_template_id** | **String**| The template to use for personal feel emails. | [optional] 
  **enabled** | **BOOLEAN**| Set whether the user is able to start receiving prompts. | [optional] 
  **send_mechanism** | **String**| The way to send the prompt | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **update_prompt_template**
+> update_prompt_template(id, alternate_content_id, new_email_id, og_email_id, new_example_video_id)
+
+Update Prompt Content
+
+Updates a Prompt Content
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::PromptsApi.new
+
+id = "id_example" # String | The prompt's id
+
+alternate_content_id = "alternate_content_id_example" # String | The alternate content id
+
+new_email_id = "new_email_id_example" # String | The prompt's new email id
+
+og_email_id = "og_email_id_example" # String | The prompt's original email id
+
+new_example_video_id = "new_example_video_id_example" # String | The prompt's new tutorial video id
+
+
+begin
+  #Update Prompt Content
+  api_instance.update_prompt_template(id, alternate_content_id, new_email_id, og_email_id, new_example_video_id)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling PromptsApi->update_prompt_template: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **String**| The prompt&#39;s id | 
+ **alternate_content_id** | **String**| The alternate content id | 
+ **new_email_id** | **String**| The prompt&#39;s new email id | 
+ **og_email_id** | **String**| The prompt&#39;s original email id | 
+ **new_example_video_id** | **String**| The prompt&#39;s new tutorial video id | 
 
 ### Return type
 

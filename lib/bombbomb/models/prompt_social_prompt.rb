@@ -24,93 +24,83 @@ limitations under the License.
 require 'date'
 
 module BombBomb
-  # Reports on the aggregate performance of a Jericho send
-  class JerichoPerformance
-    # The jericho id
+  # The Prompt\\SocialPrompt class
+  class PromptSocialPrompt
+    # The identifier of the prompt. Read Only.
+    attr_accessor :id
+
+    # The prompt's owner. Read Only.
+    attr_accessor :user_id
+
+    # If sent in a jericho context, this will have the jericho id
     attr_accessor :jericho_id
 
-    # The number of emails sent
-    attr_accessor :sent
+    # The prompt's subject line
+    attr_accessor :prompt_subject
 
-    # The unique number of people that viewed the email
-    attr_accessor :unique_views
+    # The suggested script of the prompt.
+    attr_accessor :prompt_html
 
-    # The unique number of people that visited the landing page
-    attr_accessor :unique_landing_page_views
+    # When the final email is scheduled to be sent
+    attr_accessor :scheduled_send_date
 
-    # The total number of people that visisted the landing page
-    attr_accessor :landing_page_views
+    # The client group campaign that created the prompt.
+    attr_accessor :client_group_id
 
-    # The number of emails delivered, likely less than sent due to bounces, and other common delivery issues
-    attr_accessor :delivered
+    # The URL of a thumbnail image for this prompt
+    attr_accessor :thumbnail_url
 
-    # The number of emails that bounced as undeliverable
-    attr_accessor :bounce
+    # The status of the prompt: created = 0, sent = 10, recorded = 20, job_created = 30, timed_out = 40, declined = 50 Read Only
+    attr_accessor :status
 
-    # The total number of times the emails were viewed
-    attr_accessor :open
+    # When the email was first sent out
+    attr_accessor :created_date
 
-    # The total number of times links in the emails were clicked
-    attr_accessor :click
+    # When the user was last notified about a prompt email waiting for a video
+    attr_accessor :last_notified
 
-    # The total number of times videos in the emails were played
-    attr_accessor :video_play
+    # The sendMechanism property
+    attr_accessor :send_mechanism
 
-    # The number of recipients that marked the message as abusive
-    attr_accessor :abuse_complaints
-
-    # The total number of contacts submitted to be sent, may be more than was sent to
-    attr_accessor :contacts
-
-    # The total number of prompts sent to members of the client group
-    attr_accessor :prompts_sent
-
-    # The total number of prompts sent that included a personal recording
-    attr_accessor :prompts_with_recordings
-
-    # The total number of members that chose not to send a prompt
-    attr_accessor :prompts_opted_out
+    # The types of mechanisms this prompt can send.
+    attr_accessor :send_types
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
+        :'user_id' => :'userId',
         :'jericho_id' => :'jerichoId',
-        :'sent' => :'sent',
-        :'unique_views' => :'uniqueViews',
-        :'unique_landing_page_views' => :'uniqueLandingPageViews',
-        :'landing_page_views' => :'landingPageViews',
-        :'delivered' => :'delivered',
-        :'bounce' => :'bounce',
-        :'open' => :'open',
-        :'click' => :'click',
-        :'video_play' => :'videoPlay',
-        :'abuse_complaints' => :'abuseComplaints',
-        :'contacts' => :'contacts',
-        :'prompts_sent' => :'promptsSent',
-        :'prompts_with_recordings' => :'promptsWithRecordings',
-        :'prompts_opted_out' => :'promptsOptedOut'
+        :'prompt_subject' => :'promptSubject',
+        :'prompt_html' => :'promptHtml',
+        :'scheduled_send_date' => :'scheduledSendDate',
+        :'client_group_id' => :'clientGroupId',
+        :'thumbnail_url' => :'thumbnailUrl',
+        :'status' => :'status',
+        :'created_date' => :'createdDate',
+        :'last_notified' => :'lastNotified',
+        :'send_mechanism' => :'sendMechanism',
+        :'send_types' => :'sendTypes'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'jericho_id' => :'Integer',
-        :'sent' => :'Integer',
-        :'unique_views' => :'Integer',
-        :'unique_landing_page_views' => :'Integer',
-        :'landing_page_views' => :'Integer',
-        :'delivered' => :'Integer',
-        :'bounce' => :'Integer',
-        :'open' => :'Integer',
-        :'click' => :'Integer',
-        :'video_play' => :'Integer',
-        :'abuse_complaints' => :'Integer',
-        :'contacts' => :'Integer',
-        :'prompts_sent' => :'Integer',
-        :'prompts_with_recordings' => :'Integer',
-        :'prompts_opted_out' => :'Integer'
+        :'id' => :'String',
+        :'user_id' => :'String',
+        :'jericho_id' => :'String',
+        :'prompt_subject' => :'String',
+        :'prompt_html' => :'String',
+        :'scheduled_send_date' => :'DateTime',
+        :'client_group_id' => :'String',
+        :'thumbnail_url' => :'String',
+        :'status' => :'Integer',
+        :'created_date' => :'DateTime',
+        :'last_notified' => :'DateTime',
+        :'send_mechanism' => :'DateTime',
+        :'send_types' => :'Array<String>'
       }
     end
 
@@ -122,64 +112,58 @@ module BombBomb
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'userId')
+        self.user_id = attributes[:'userId']
+      end
+
       if attributes.has_key?(:'jerichoId')
         self.jericho_id = attributes[:'jerichoId']
       end
 
-      if attributes.has_key?(:'sent')
-        self.sent = attributes[:'sent']
+      if attributes.has_key?(:'promptSubject')
+        self.prompt_subject = attributes[:'promptSubject']
       end
 
-      if attributes.has_key?(:'uniqueViews')
-        self.unique_views = attributes[:'uniqueViews']
+      if attributes.has_key?(:'promptHtml')
+        self.prompt_html = attributes[:'promptHtml']
       end
 
-      if attributes.has_key?(:'uniqueLandingPageViews')
-        self.unique_landing_page_views = attributes[:'uniqueLandingPageViews']
+      if attributes.has_key?(:'scheduledSendDate')
+        self.scheduled_send_date = attributes[:'scheduledSendDate']
       end
 
-      if attributes.has_key?(:'landingPageViews')
-        self.landing_page_views = attributes[:'landingPageViews']
+      if attributes.has_key?(:'clientGroupId')
+        self.client_group_id = attributes[:'clientGroupId']
       end
 
-      if attributes.has_key?(:'delivered')
-        self.delivered = attributes[:'delivered']
+      if attributes.has_key?(:'thumbnailUrl')
+        self.thumbnail_url = attributes[:'thumbnailUrl']
       end
 
-      if attributes.has_key?(:'bounce')
-        self.bounce = attributes[:'bounce']
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
       end
 
-      if attributes.has_key?(:'open')
-        self.open = attributes[:'open']
+      if attributes.has_key?(:'createdDate')
+        self.created_date = attributes[:'createdDate']
       end
 
-      if attributes.has_key?(:'click')
-        self.click = attributes[:'click']
+      if attributes.has_key?(:'lastNotified')
+        self.last_notified = attributes[:'lastNotified']
       end
 
-      if attributes.has_key?(:'videoPlay')
-        self.video_play = attributes[:'videoPlay']
+      if attributes.has_key?(:'sendMechanism')
+        self.send_mechanism = attributes[:'sendMechanism']
       end
 
-      if attributes.has_key?(:'abuseComplaints')
-        self.abuse_complaints = attributes[:'abuseComplaints']
-      end
-
-      if attributes.has_key?(:'contacts')
-        self.contacts = attributes[:'contacts']
-      end
-
-      if attributes.has_key?(:'promptsSent')
-        self.prompts_sent = attributes[:'promptsSent']
-      end
-
-      if attributes.has_key?(:'promptsWithRecordings')
-        self.prompts_with_recordings = attributes[:'promptsWithRecordings']
-      end
-
-      if attributes.has_key?(:'promptsOptedOut')
-        self.prompts_opted_out = attributes[:'promptsOptedOut']
+      if attributes.has_key?(:'sendTypes')
+        if (value = attributes[:'sendTypes']).is_a?(Array)
+          self.send_types = value
+        end
       end
 
     end
@@ -202,21 +186,19 @@ module BombBomb
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
+          user_id == o.user_id &&
           jericho_id == o.jericho_id &&
-          sent == o.sent &&
-          unique_views == o.unique_views &&
-          unique_landing_page_views == o.unique_landing_page_views &&
-          landing_page_views == o.landing_page_views &&
-          delivered == o.delivered &&
-          bounce == o.bounce &&
-          open == o.open &&
-          click == o.click &&
-          video_play == o.video_play &&
-          abuse_complaints == o.abuse_complaints &&
-          contacts == o.contacts &&
-          prompts_sent == o.prompts_sent &&
-          prompts_with_recordings == o.prompts_with_recordings &&
-          prompts_opted_out == o.prompts_opted_out
+          prompt_subject == o.prompt_subject &&
+          prompt_html == o.prompt_html &&
+          scheduled_send_date == o.scheduled_send_date &&
+          client_group_id == o.client_group_id &&
+          thumbnail_url == o.thumbnail_url &&
+          status == o.status &&
+          created_date == o.created_date &&
+          last_notified == o.last_notified &&
+          send_mechanism == o.send_mechanism &&
+          send_types == o.send_types
     end
 
     # @see the `==` method
@@ -228,7 +210,7 @@ module BombBomb
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [jericho_id, sent, unique_views, unique_landing_page_views, landing_page_views, delivered, bounce, open, click, video_play, abuse_complaints, contacts, prompts_sent, prompts_with_recordings, prompts_opted_out].hash
+      [id, user_id, jericho_id, prompt_subject, prompt_html, scheduled_send_date, client_group_id, thumbnail_url, status, created_date, last_notified, send_mechanism, send_types].hash
     end
 
     # Builds the object from hash

@@ -24,36 +24,36 @@ limitations under the License.
 require "uri"
 
 module BombBomb
-  class OrdersApi
+  class FormsApi
     attr_accessor :api_client
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
 
-    # Deletes image from user s3 store
-    # Deletes image from user s3 store
-    # @param file_name Filename for deletion
+    # Get csv
+    # Get form tracking as csv
+    # @param id Id of the form
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def template_asset_delete(file_name, opts = {})
-      template_asset_delete_with_http_info(file_name, opts)
+    def get_form_tracking_as_csv(id, opts = {})
+      get_form_tracking_as_csv_with_http_info(id, opts)
       return nil
     end
 
-    # Deletes image from user s3 store
-    # Deletes image from user s3 store
-    # @param file_name Filename for deletion
+    # Get csv
+    # Get form tracking as csv
+    # @param id Id of the form
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def template_asset_delete_with_http_info(file_name, opts = {})
+    def get_form_tracking_as_csv_with_http_info(id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: OrdersApi.template_asset_delete ..."
+        @api_client.config.logger.debug "Calling API: FormsApi.get_form_tracking_as_csv ..."
       end
-      # verify the required parameter 'file_name' is set
-      fail ArgumentError, "Missing the required parameter 'file_name' when calling OrdersApi.template_asset_delete" if file_name.nil?
+      # verify the required parameter 'id' is set
+      fail ArgumentError, "Missing the required parameter 'id' when calling FormsApi.get_form_tracking_as_csv" if id.nil?
       # resource path
-      local_var_path = "/orders/templates/images".sub('{format}','json')
+      local_var_path = "/forms/{id}/tracking/export".sub('{format}','json').sub('{' + 'id' + '}', id.to_s)
 
       # query parameters
       query_params = {}
@@ -71,19 +71,18 @@ module BombBomb
 
       # form parameters
       form_params = {}
-      form_params["fileName"] = file_name
 
       # http body (model)
       post_body = nil
       auth_names = ['BBOAuth2']
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: OrdersApi#template_asset_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: FormsApi#get_form_tracking_as_csv\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

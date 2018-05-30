@@ -9,7 +9,11 @@ Method | HTTP request | Description
 [**get_email_tracking**](EmailsApi.md#get_email_tracking) | **GET** /emails/{emailId}/tracking | Get Email Tracking
 [**get_email_tracking_interactions**](EmailsApi.md#get_email_tracking_interactions) | **GET** /emails/{emailId}/tracking/interactions | Get Email Tracking Interactions
 [**get_hourly_email_tracking**](EmailsApi.md#get_hourly_email_tracking) | **GET** /emails/{emailId}/tracking/hourly | Get Hourly Email Tracking
+[**get_live_fire_data**](EmailsApi.md#get_live_fire_data) | **GET** /emails/livefire | Get livefire feed data
 [**get_quick_send_templates**](EmailsApi.md#get_quick_send_templates) | **GET** /emails/quicksend/templates | Get all quicksend templates
+[**get_template_html_for_template_id**](EmailsApi.md#get_template_html_for_template_id) | **GET** /emails/templates/{templateId}/html | Get the HTML for a given template
+[**get_video_quick_sender_data**](EmailsApi.md#get_video_quick_sender_data) | **GET** /emails/quicksend | Get quicksend data
+[**save_quick_sender_settings**](EmailsApi.md#save_quick_sender_settings) | **POST** /emails/quicksend/settings | Save quicksender settings
 [**video_quick_sender**](EmailsApi.md#video_quick_sender) | **POST** /emails/quicksend | Send a quicksend email
 
 
@@ -298,6 +302,51 @@ nil (empty response body)
 
 
 
+# **get_live_fire_data**
+> get_live_fire_data
+
+Get livefire feed data
+
+Get the user data for the live fire feed emails
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::EmailsApi.new
+
+begin
+  #Get livefire feed data
+  api_instance.get_live_fire_data
+rescue BombBomb::ApiError => e
+  puts "Exception when calling EmailsApi->get_live_fire_data: #{e}"
+end
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
 # **get_quick_send_templates**
 > get_quick_send_templates
 
@@ -327,6 +376,177 @@ end
 
 ### Parameters
 This endpoint does not need any parameter.
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **get_template_html_for_template_id**
+> get_template_html_for_template_id(template_id, opts)
+
+Get the HTML for a given template
+
+Get the HTML for a given template, with or without rendered variables
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::EmailsApi.new
+
+template_id = "template_id_example" # String | The id of the template.
+
+opts = { 
+  render_variables: "render_variables_example" # String | Whether to render profile variables in the returned HTML.
+}
+
+begin
+  #Get the HTML for a given template
+  api_instance.get_template_html_for_template_id(template_id, opts)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling EmailsApi->get_template_html_for_template_id: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_id** | **String**| The id of the template. | 
+ **render_variables** | **String**| Whether to render profile variables in the returned HTML. | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **get_video_quick_sender_data**
+> get_video_quick_sender_data(opts)
+
+Get quicksend data
+
+Get the user data for quicksender, including templates and lists.
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::EmailsApi.new
+
+opts = { 
+  message: "message_example", # String | A message for the video content.
+  subject: "subject_example", # String | A subject for the video content.
+  video_id: "video_id_example", # String | A video ID.
+  template_id: "template_id_example", # String | A template ID.
+  comma_delim_emails: "comma_delim_emails_example" # String | Comma delimited emails
+}
+
+begin
+  #Get quicksend data
+  api_instance.get_video_quick_sender_data(opts)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling EmailsApi->get_video_quick_sender_data: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **message** | **String**| A message for the video content. | [optional] 
+ **subject** | **String**| A subject for the video content. | [optional] 
+ **video_id** | **String**| A video ID. | [optional] 
+ **template_id** | **String**| A template ID. | [optional] 
+ **comma_delim_emails** | **String**| Comma delimited emails | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **save_quick_sender_settings**
+> save_quick_sender_settings(opts)
+
+Save quicksender settings
+
+Save the quicksender notification and default template settings
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::EmailsApi.new
+
+opts = { 
+  alert_on_play: "alert_on_play_example", # String | A preference setting for whether or not to notify user on quicksend email video plays.
+  alert_on_open: "alert_on_open_example", # String | A preference setting for whether or not to notify user on quicksend email opens.
+  template_id: "template_id_example" # String | Id of a template to use for this send. A null value means use the default for this user.
+}
+
+begin
+  #Save quicksender settings
+  api_instance.save_quick_sender_settings(opts)
+rescue BombBomb::ApiError => e
+  puts "Exception when calling EmailsApi->save_quick_sender_settings: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **alert_on_play** | **String**| A preference setting for whether or not to notify user on quicksend email video plays. | [optional] 
+ **alert_on_open** | **String**| A preference setting for whether or not to notify user on quicksend email opens. | [optional] 
+ **template_id** | **String**| Id of a template to use for this send. A null value means use the default for this user. | [optional] 
 
 ### Return type
 
