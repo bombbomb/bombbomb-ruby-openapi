@@ -11,5 +11,5 @@ Swagger Codegen version: 2.3.1
 =end
 
 module BombBomb
-  VERSION = "2.0.831"
+  VERSION = "2.0.25798"
 end
