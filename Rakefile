@@ -1,3 +1,8 @@
-task :default do
-  puts "So Raked!"
+begin
+  require 'rspec/core/rake_task'
+
+  RSpec::Core::RakeTask.new(:spec)
+  task default: :spec
+rescue LoadError
+  # no rspec available
 end

@@ -16,6 +16,8 @@ Method | HTTP request | Description
 [**get_jericho_sends**](TeamsApi.md#get_jericho_sends) | **GET** /team/{teamId}/jericho | List Jericho Sends
 [**get_jericho_stats**](TeamsApi.md#get_jericho_stats) | **GET** /team/{teamId}/jericho/{jerichoId}/performance | Gets Jericho performance statistics
 [**get_paged_client_group_members**](TeamsApi.md#get_paged_client_group_members) | **GET** /team/{teamId}/members | List Team Members
+[**get_prompt_monthly_stats**](TeamsApi.md#get_prompt_monthly_stats) | **GET** /team/{month}/{year}/monthStats | Jericho Monthly Stats
+[**get_prompt_overview**](TeamsApi.md#get_prompt_overview) | **GET** /team/promptOverview | Get Prompt Overview
 [**get_subteams**](TeamsApi.md#get_subteams) | **GET** /team/{teamId}/subteam | List Subteams
 [**get_team_prompt_aggregate_stats**](TeamsApi.md#get_team_prompt_aggregate_stats) | **GET** /team/{clientGroupId}/campaign/stats | Get aggregate stats for campaigns
 [**get_team_prompt_campaigns**](TeamsApi.md#get_team_prompt_campaigns) | **GET** /team/{clientGroupId}/campaign | Get campaigns for team
@@ -718,6 +720,107 @@ nil (empty response body)
 
 
 
+# **get_prompt_monthly_stats**
+> String get_prompt_monthly_stats(month, year)
+
+Jericho Monthly Stats
+
+Jericho Monthly Stats
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::TeamsApi.new
+
+month = "month_example" # String | The month whose Jericho sends you wish to see.
+
+year = "year_example" # String | The year whose Jericho sends you wish to see.
+
+
+begin
+  #Jericho Monthly Stats
+  result = api_instance.get_prompt_monthly_stats(month, year)
+  p result
+rescue BombBomb::ApiError => e
+  puts "Exception when calling TeamsApi->get_prompt_monthly_stats: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **month** | **String**| The month whose Jericho sends you wish to see. | 
+ **year** | **String**| The year whose Jericho sends you wish to see. | 
+
+### Return type
+
+**String**
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
+# **get_prompt_overview**
+> String get_prompt_overview
+
+Get Prompt Overview
+
+Get Prompt Overview
+
+### Example
+```ruby
+# load the gem
+require 'bombbomb'
+# setup authorization
+BombBomb.configure do |config|
+  # Configure OAuth2 access token for authorization: BBOAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = BombBomb::TeamsApi.new
+
+begin
+  #Get Prompt Overview
+  result = api_instance.get_prompt_overview
+  p result
+rescue BombBomb::ApiError => e
+  puts "Exception when calling TeamsApi->get_prompt_overview: #{e}"
+end
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**String**
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+
 # **get_subteams**
 > Array&lt;TeamPublicRepresentation&gt; get_subteams(team_id)
 
@@ -729,11 +832,6 @@ Returns a collection of subteams for a parent team
 ```ruby
 # load the gem
 require 'bombbomb'
-# setup authorization
-BombBomb.configure do |config|
-  # Configure OAuth2 access token for authorization: BBOAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = BombBomb::TeamsApi.new
 
@@ -761,7 +859,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BBOAuth2](../README.md#BBOAuth2)
+No authorization required
 
 ### HTTP request headers
 

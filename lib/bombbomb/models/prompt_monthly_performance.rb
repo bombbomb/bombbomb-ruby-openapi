@@ -13,28 +13,38 @@ Swagger Codegen version: 2.3.1
 require 'date'
 
 module BombBomb
-  # The SignUploadResponse class
-  class SignUploadResponse
-    # Base64 encoded policy.
-    attr_accessor :policy
+  # The PromptMonthlyPerformance class
+  class PromptMonthlyPerformance
+    # The startDate property
+    attr_accessor :start_date
 
-    # Signature for policy.
-    attr_accessor :signature
+    # The endDate property
+    attr_accessor :end_date
+
+    # The userBatchListsIdHelper property
+    attr_accessor :user_batch_lists_id_helper
+
+    # The promptIdHelper property
+    attr_accessor :prompt_id_helper
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'policy' => :'policy',
-        :'signature' => :'signature'
+        :'start_date' => :'startDate',
+        :'end_date' => :'endDate',
+        :'user_batch_lists_id_helper' => :'userBatchListsIdHelper',
+        :'prompt_id_helper' => :'promptIdHelper'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'policy' => :'String',
-        :'signature' => :'String'
+        :'start_date' => :'String',
+        :'end_date' => :'String',
+        :'user_batch_lists_id_helper' => :'String',
+        :'prompt_id_helper' => :'String'
       }
     end
 
@@ -46,12 +56,20 @@ module BombBomb
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'policy')
-        self.policy = attributes[:'policy']
+      if attributes.has_key?(:'startDate')
+        self.start_date = attributes[:'startDate']
       end
 
-      if attributes.has_key?(:'signature')
-        self.signature = attributes[:'signature']
+      if attributes.has_key?(:'endDate')
+        self.end_date = attributes[:'endDate']
+      end
+
+      if attributes.has_key?(:'userBatchListsIdHelper')
+        self.user_batch_lists_id_helper = attributes[:'userBatchListsIdHelper']
+      end
+
+      if attributes.has_key?(:'promptIdHelper')
+        self.prompt_id_helper = attributes[:'promptIdHelper']
       end
 
     end
@@ -74,8 +92,10 @@ module BombBomb
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          policy == o.policy &&
-          signature == o.signature
+          start_date == o.start_date &&
+          end_date == o.end_date &&
+          user_batch_lists_id_helper == o.user_batch_lists_id_helper &&
+          prompt_id_helper == o.prompt_id_helper
     end
 
     # @see the `==` method
@@ -87,7 +107,7 @@ module BombBomb
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [policy, signature].hash
+      [start_date, end_date, user_batch_lists_id_helper, prompt_id_helper].hash
     end
 
     # Builds the object from hash

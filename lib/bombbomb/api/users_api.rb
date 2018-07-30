@@ -13,38 +13,35 @@ Swagger Codegen version: 2.3.1
 require "uri"
 
 module BombBomb
-  class CurriculumApi
+  class UsersApi
     attr_accessor :api_client
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
 
-    # Get Curricula
-    # Get Curricula, optionally with progress included.
+    # Get client contact information.
+    # Get the client contact information of the user's account.
     # @param [Hash] opts the optional parameters
-    # @option opts [BOOLEAN] :include_progress Whether to return progress with the curriculum.
-    # @return [Array<Curriculum>]
-    def get_curricula(opts = {})
-      data, _status_code, _headers = get_curricula_with_http_info(opts)
-      return data
+    # @return [nil]
+    def get_client_contact_information(opts = {})
+      get_client_contact_information_with_http_info(opts)
+      return nil
     end
 
-    # Get Curricula
-    # Get Curricula, optionally with progress included.
+    # Get client contact information.
+    # Get the client contact information of the user&#39;s account.
     # @param [Hash] opts the optional parameters
-    # @option opts [BOOLEAN] :include_progress Whether to return progress with the curriculum.
-    # @return [Array<(Array<Curriculum>, Fixnum, Hash)>] Array<Curriculum> data, response status code and response headers
-    def get_curricula_with_http_info(opts = {})
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def get_client_contact_information_with_http_info(opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: CurriculumApi.get_curricula ..."
+        @api_client.config.logger.debug "Calling API: UsersApi.get_client_contact_information ..."
       end
       # resource path
-      local_var_path = "/curricula/"
+      local_var_path = "/clients/contact/information"
 
       # query parameters
       query_params = {}
-      query_params[:'includeProgress'] = opts[:'include_progress'] if !opts[:'include_progress'].nil?
 
       # header parameters
       header_params = {}
@@ -64,33 +61,32 @@ module BombBomb
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names,
-        :return_type => 'Array<Curriculum>')
+        :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CurriculumApi#get_curricula\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: UsersApi#get_client_contact_information\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Get Detailed For User
-    # Get all curricula for user including progress for each curriculum.
+    # Get user profile information.
+    # Get the users profile information.
     # @param [Hash] opts the optional parameters
-    # @return [Array<CurriculumWithProgress>]
-    def get_user_curriculum_with_progress(opts = {})
-      data, _status_code, _headers = get_user_curriculum_with_progress_with_http_info(opts)
-      return data
+    # @return [nil]
+    def get_user_profile_info(opts = {})
+      get_user_profile_info_with_http_info(opts)
+      return nil
     end
 
-    # Get Detailed For User
-    # Get all curricula for user including progress for each curriculum.
+    # Get user profile information.
+    # Get the users profile information.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Array<CurriculumWithProgress>, Fixnum, Hash)>] Array<CurriculumWithProgress> data, response status code and response headers
-    def get_user_curriculum_with_progress_with_http_info(opts = {})
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def get_user_profile_info_with_http_info(opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: CurriculumApi.get_user_curriculum_with_progress ..."
+        @api_client.config.logger.debug "Calling API: UsersApi.get_user_profile_info ..."
       end
       # resource path
-      local_var_path = "/curriculum/getForUserWithProgress"
+      local_var_path = "/users/profile/information"
 
       # query parameters
       query_params = {}
@@ -113,10 +109,9 @@ module BombBomb
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names,
-        :return_type => 'Array<CurriculumWithProgress>')
+        :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CurriculumApi#get_user_curriculum_with_progress\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: UsersApi#get_user_profile_info\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

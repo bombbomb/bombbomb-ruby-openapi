@@ -4,6 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_pages** | **Integer** |  | [optional] 
-**items** | [**Array&lt;InlineResponse200Items&gt;**](InlineResponse200Items.md) |  | [optional] 
+**items** | [**Array&lt;ClientGroupAssetMetaData&gt;**](ClientGroupAssetMetaData.md) |  | [optional] 
 
 
